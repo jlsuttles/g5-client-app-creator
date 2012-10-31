@@ -1,4 +1,4 @@
-G5Hub::Application.routes.draw do
+G5ClientAppCreator::Application.routes.draw do
 
   resources :features
   resources :locations
