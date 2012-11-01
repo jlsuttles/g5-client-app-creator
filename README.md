@@ -1,11 +1,16 @@
 # G5 Hub
 
-A Rails application that publishes a feed consisting of hEntries as defined by [Microformats 2](http://microformats.org/wiki/microformats-2#h-entry). See the demo at [g5-hub.herokuapp.com](http://g5-hub.herokuappcom).
+A Rails application that consumes a feed consisting of hEntries as defined by [Microformats 2](http://microformats.org/wiki/microformats-2#h-entry) from [g5-configurator.herokuapp.com](http://g5-configurator.herokuapp.com). Each Entry is a set of instructions that the app creator will act on.
 
 
 ## Setup
 
 1. Install all the required gems
+Add GEM_FURY_SECRET to ENV
+```bash
+export GEM_FURY_SECRET="SUPER_SECRET_KEY"
+```
+
 ```bash
 bundle
 ```
@@ -20,6 +25,7 @@ rake db:create db:schema:load db:seed
 ## Authors
 
   * Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
+  * Bookis Smuin / [@bookis](https://github.com/bookis)
 
 
 ## Contributing

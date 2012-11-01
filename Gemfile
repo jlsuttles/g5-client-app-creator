@@ -14,12 +14,13 @@ group :assets do
 end
 
 group :test do
-  gem "mocha"
+  gem "rb-fsevent"
 end
 
-group :development do
+group :development, :test do
   gem "nifty-generators", "~> 0.4.6"
-  gem "heroku", "~> 2.32.6"
+  gem "rspec-rails"
+  gem 'guard-rspec'
 end
 
 group :production do
