@@ -6,6 +6,7 @@ gem "pg"
 gem "jquery-rails"
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'g5_hentry_consumer'
+gem 'github_heroku_deployer'
 
 group :assets do
   gem "sass-rails", "~> 3.2.3"
