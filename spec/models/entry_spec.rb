@@ -15,25 +15,40 @@ describe Entry do
   describe "consuming feed" do
     let(:feed) { Entry.consume_feed('spec/support/example_feed.html') }
     subject { feed }
-        
+
     it "has elements" do
       feed.should have(1).thing
     end
-    
+
     describe "parsed entry" do
       subject { feed.first }
 
-      its(:client_name) { should eq "i-want-deployed" }
-      its(:uid)         { should eq "http://i-want-deployed.herokuapp.com"}
+      its(:name) { should eq "i-want-deployed" }
+
       it "is a entry" do
         subject.should be_an_instance_of Entry
       end
-      it "should call push client apps" do
-        entry = Entry.new(uid: "http://example.com", client_name: "blah")
-        entry.should_receive(:push_client_apps).once
-        entry.save
+
+      describe "apps" do
+
+        it "should have a client hub" do
+          subject.client_apps.should be_present
+        end
+
+        it "has 2 client apps" do
+          subject.client_apps.should have(2).things(ClientApp)
+        end
+        
+        it "has a hub" do
+          subject.client_hub.app_type.should eq "ClientHub"
+        end
+        
+        it "has a deployer" do
+          subject.client_hub_deployer.app_type.should eq "ClientHubDeployer"
+        end
+        
       end
     end
   end
-  
+
 end

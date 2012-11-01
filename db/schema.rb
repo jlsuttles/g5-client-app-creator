@@ -11,48 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031182320) do
+ActiveRecord::Schema.define(:version => 20121101194716) do
 
-  create_table "admins", :force => true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "customers", :force => true do |t|
-    t.integer  "admin_id"
+  create_table "client_apps", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "app_type"
+    t.string   "uid"
+    t.integer  "entry_id"
+    t.integer  "sibling_app_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
-  create_table "customers_features", :id => false, :force => true do |t|
-    t.integer "customer_id"
-    t.integer "feature_id"
-  end
+  add_index "client_apps", ["entry_id"], :name => "index_client_apps_on_entry_id"
+  add_index "client_apps", ["sibling_app_id"], :name => "index_client_apps_on_sibling_app_id"
 
   create_table "entries", :force => true do |t|
-    t.string   "client_name"
-    t.string   "uid"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "features", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "locations", :force => true do |t|
-    t.integer  "customer_id"
-    t.string   "name"
-    t.boolean  "corporate"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
 end
