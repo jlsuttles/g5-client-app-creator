@@ -7,6 +7,7 @@ A Rails application that consumes a feed consisting of hEntries as defined by [M
 
 1. Install all the required gems
 Add GEM_FURY_SECRET to ENV
+
 ```bash
 export GEM_FURY_SECRET="SUPER_SECRET_KEY"
 ```
