@@ -26,7 +26,7 @@ class Entry < ActiveRecord::Base
   private
   
   def create_client_app
-    client_apps.create_from_name(name, app_type: "ClientHub")
+    client_apps.create(name: name, app_type: "ClientHub")
   end
   
 end

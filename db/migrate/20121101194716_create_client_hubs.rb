@@ -1,7 +1,7 @@
 class CreateClientHubs < ActiveRecord::Migration
   def change
     create_table :client_apps do |t|
-      t.string :name, :app_type, :uid
+      t.string :name, :app_type
       t.integer :entry_id, :sibling_app_id
 
       t.timestamps

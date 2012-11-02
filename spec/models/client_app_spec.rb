@@ -4,6 +4,7 @@ describe ClientApp do
   let(:entry) { Entry.create(name: "mock-app") }
   subject { entry.client_apps.last }
   it "creates from name" do
+    puts entry.client_apps.inspect
     entry.client_hub.name.should eq "mock-app"
   end
 
@@ -22,7 +23,7 @@ describe ClientApp do
   it "does something" do
     app = ClientApp.new(name: "mockk-app", entry_id: 1, app_type: "ClientHub")
     app.uid = "blah"
-    app.should_receive(:deploy).once
+    app.should_receive(:async_deploy).once
     app.save
   end
 end
