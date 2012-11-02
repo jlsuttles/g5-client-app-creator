@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(:version => 20121101194716) do
   create_table "client_apps", :force => true do |t|
     t.string   "name"
     t.string   "app_type"
-    t.string   "uid"
     t.integer  "entry_id"
     t.integer  "sibling_app_id"
     t.datetime "created_at",     :null => false
@@ -28,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20121101194716) do
 
   create_table "entries", :force => true do |t|
     t.string   "name"
+    t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

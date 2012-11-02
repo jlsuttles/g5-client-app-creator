@@ -1,13 +1,11 @@
 class Entry < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :uid
   APP_NAME = "g5-client-app-creator"
-  after_create :create_client_app
   validates :name, uniqueness: true
   has_many :client_apps
-  has_one :client_hub, class_name: "ClientApp", conditions: {app_type: "ClientHub"}
-  has_one :client_hub_deployer, class_name: "ClientApp", conditions: {app_type: "ClientHubDeployer"}
-  
-  def self.consume_feed(file)
+
+  def self.consume_feed(file=nil)
+    file ||= "http://g5-configurator.herokuapp.com/configurations"
     feed = G5HentryConsumer.parse(file)
     self.parse_entries!(feed)
   end
@@ -19,14 +17,13 @@ class Entry < ActiveRecord::Base
   def self.parse_entries!(feed)
     feed = feed.entries.delete_if {|entry| !self.targets_me?(entry.content.target.first.url.first) }
     feed.entries.map do |entry|
-      self.find_or_create_by_name(entry.name)
-    end
+      e = self.find_or_create_by_uid(entry.bookmark)
+      puts e.inspect
+      entry.content.apps.each do |app|
+        e.client_apps.create(name: app.name)
+      end
+      e
+    end.flatten
   end
-  
-  private
-  
-  def create_client_app
-    client_apps.create(name: name, app_type: "ClientHub")
-  end
-  
+
 end

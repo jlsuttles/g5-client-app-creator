@@ -17,18 +17,19 @@ describe Entry do
     subject { feed }
 
     it "has elements" do
+      puts feed.inspect
       feed.should have(1).thing
     end
 
     describe "parsed entry" do
-      subject { feed.first }
+      subject { feed.last }
 
-      its(:name) { should eq "i-want-deployed" }
+      its(:uid) { should eq "http://g5-configurator.herokuapp.com/configurations/2" }
 
       it "is a entry" do
         subject.should be_an_instance_of Entry
       end
-
+      
       describe "apps" do
 
         it "should have a client hub" do
@@ -36,17 +37,10 @@ describe Entry do
         end
 
         it "has 2 client apps" do
+          puts subject.client_apps.inspect
           subject.client_apps.should have(2).things(ClientApp)
         end
-        
-        it "has a hub" do
-          subject.client_hub.app_type.should eq "ClientHub"
-        end
-        
-        it "has a deployer" do
-          subject.client_hub_deployer.app_type.should eq "ClientHubDeployer"
-        end
-        
+
       end
     end
   end
