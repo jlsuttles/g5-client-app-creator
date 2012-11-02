@@ -5,7 +5,7 @@ class ClientApp < ActiveRecord::Base
   belongs_to :sibling_app, class_name: "ClientApp", foreign_key: :sibling_app_id
   
   after_create :create_sibling, unless: :sibling_app
-  after_create :deploy
+  after_create :async_deploy
   def async_deploy
     Resque.enqueue(ClientAppDeployer, self.id)
   end
