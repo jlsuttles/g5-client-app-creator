@@ -1,5 +1,5 @@
 source :rubygems
-source "https://gems.gemfury.com/#{ENV['GEM_FURY_SECRET']}/"
+source ENV['GEMFURY_URL']
 
 gem "rails", "3.2.7"
 gem "pg"
