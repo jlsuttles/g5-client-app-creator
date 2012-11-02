@@ -1,11 +1,11 @@
 source :rubygems
-source ENV['GEMFURY_URL']
+# source ENV['GEMFURY_URL']
 
 gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
 gem "bcrypt-ruby", :require => "bcrypt"
-gem 'g5_hentry_consumer'
+# gem 'g5_hentry_consumer'
 gem 'github_heroku_deployer'
 gem "resque", "~> 1.23.0"
 gem "foreman", "~> 0.60.2"
