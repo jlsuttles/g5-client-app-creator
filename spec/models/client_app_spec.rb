@@ -4,16 +4,7 @@ describe ClientApp do
   let(:entry) { Entry.create(name: "mock-app") }
   subject { entry.client_apps.last }
   it "creates from name" do
-    puts entry.client_apps.inspect
     entry.client_hub.name.should eq "mock-app"
-  end
-
-  it "has a uid" do
-    entry.client_hub.uid.should eq "http://g5-ch-mock-app.herokuapp.com"
-  end
-
-  it "has a deployer uid" do
-    entry.client_hub_deployer.uid.should eq "http://g5-chd-mock-app.herokuapp.com"
   end
 
   it "has a sibling app" do
