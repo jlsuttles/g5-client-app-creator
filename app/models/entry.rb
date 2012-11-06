@@ -18,7 +18,6 @@ class Entry < ActiveRecord::Base
     feed = feed.entries.delete_if {|entry| !self.targets_me?(entry.content.target.first.url.first) }
     feed.entries.map do |entry|
       e = self.find_or_create_by_uid(entry.bookmark)
-      puts e.inspect
       entry.content.apps.each do |app|
         e.client_apps.create(name: app.name)
       end

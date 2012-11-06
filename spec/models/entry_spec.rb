@@ -17,7 +17,6 @@ describe Entry do
     subject { feed }
 
     it "has elements" do
-      puts feed.inspect
       feed.should have(1).thing
     end
 
@@ -37,7 +36,6 @@ describe Entry do
         end
 
         it "has 2 client apps" do
-          puts subject.client_apps.inspect
           subject.client_apps.should have(2).things(ClientApp)
         end
 
