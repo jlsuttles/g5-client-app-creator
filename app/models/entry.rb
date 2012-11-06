@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   attr_accessible :name, :uid
   APP_NAME = "g5-client-app-creator"
-  validates :name, uniqueness: true
+  validates :uid, uniqueness: true
   has_many :client_apps
 
   def self.consume_feed(file=nil)
@@ -18,10 +18,11 @@ class Entry < ActiveRecord::Base
     feed = feed.entries.delete_if {|entry| !self.targets_me?(entry.content.target.first.url.first) }
     feed.entries.map do |entry|
       e = self.find_or_create_by_uid(entry.bookmark)
-      entry.content.apps.each do |app|
-        e.client_apps.create(name: app.name)
+      entry.content.configuration.each do |app|
+        e.client_apps.build(name: app.name)
       end
-      e
+      e.save
+      puts e.errors.inspect
     end.flatten
   end
 
