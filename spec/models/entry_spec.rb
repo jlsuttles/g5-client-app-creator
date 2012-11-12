@@ -2,13 +2,20 @@ require 'spec_helper'
 
 describe Entry do
   describe "#targets_me?" do
-    # it { Entry.targets_me?('http://g5-chd-mock-app').should be_false }
-    # it { Entry.targets_me?('').should be_false }
-    # it { Entry.targets_me?(nil).should be_false }
-    # it { Entry.targets_me?("http://g5-client-app-creator.herokuapp.com").should be_true }
-    # it { Entry.targets_me?("https://g5-client-app-creator.herokuapp.com").should be_true }
-    # it { Entry.targets_me?("https://www.g5-client-app-creator.herokuapp.com").should be_true }
-    # it { Entry.targets_me?("https://www.g5-client-app-creator.herokuapp.com/").should be_true }
+    it { Entry.targets_me?(hentry_with_target Entry::TARGET_URL).should be_true }
+    it { Entry.targets_me?('').should be_false }
+    it { Entry.targets_me?(nil).should be_false }
+    it { Entry.targets_me?(hentry_with_target 'http://g5-chd-mock-app').should be_false }
+    it { Entry.targets_me?(hentry_with_target "https://g5-client-app-creator.herokuapp.com").should be_false }
+    it { Entry.targets_me?(hentry_with_target "https://www.g5-client-app-creator.herokuapp.com").should be_false }
+    it { Entry.targets_me?(hentry_with_target "https://www.g5-client-app-creator.herokuapp.com/").should be_false }
+
+    def hentry_with_target(target)
+      feed = G5HentryConsumer.parse("spec/support/example_feed.html")
+      hentry = feed.entries.first
+      hentry.content.target.first.url = target
+      hentry
+    end
   end
 
   describe "consuming feed" do
@@ -16,7 +23,7 @@ describe Entry do
     subject { feed }
 
     it "has elements" do
-      feed.should have(1).thing
+      subject.should have(1).thing
     end
 
     describe "parsed entry" do

@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
   FEED_URL = "http://g5-configurator.herokuapp.com/configurations"
-  TARGET_APP_NAME = "g5-client-app-creator"
+  TARGET_URL = "http://g5-client-app-creator.herokuapp.com"
 
   attr_accessible :name, :uid
 
@@ -20,8 +20,9 @@ class Entry < ActiveRecord::Base
     end
 
     def targets_me?(hentry)
-      url = hentry.content.target.first.url.first
-      url =~ /^https?:\/\/w{3}?.?#{TARGET_APP_NAME}.herokuapp.com/i
+      url = hentry.content.target.first.url if hentry.is_a?(HentryConsumer::HEntry)
+      url = url.first if url.is_a?(Array)
+      !!(url && url =~ /^#{TARGET_URL}$/i)
     end
 
     def consume_entry(hentry)
