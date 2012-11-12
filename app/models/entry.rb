@@ -14,9 +14,9 @@ class Entry < ActiveRecord::Base
     end
 
     def consume_feed(path_or_url=FEED_URL)
-      feed(path_or_url).entries.each do |hentry|
+      feed(path_or_url).entries.map do |hentry|
         consume_entry(hentry)
-      end
+      end.compact
     end
 
     def targets_me?(hentry)
@@ -29,6 +29,7 @@ class Entry < ActiveRecord::Base
         entry = find_or_initialize_from_hentry(hentry)
         entry.build_client_apps_from_hentry(hentry)
         entry.save
+        entry
       end
     end
 
