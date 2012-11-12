@@ -1,10 +1,14 @@
 class ClientApp < ActiveRecord::Base
   attr_accessible :name, :app_type, :entry_id, :sibling_app, :git_repo
-  validates :git_repo, :entry_id, :name, presence: true
-  validates :name, uniqueness: {scope: :app_type}
+
   belongs_to :entry
   
+  validates :git_repo, presence: true
+  validates :entry_id, presence: true
+  validates :name, presence: true, uniqueness: { scope: :app_type }
+
   after_create :async_deploy
+
   def async_deploy
     Resque.enqueue(ClientAppDeployer, self.id)
   end
@@ -38,5 +42,4 @@ class ClientApp < ActiveRecord::Base
   def siblings
     entry.client_apps.drop_while { |k| k == self }
   end
-  
 end
