@@ -4,6 +4,7 @@ describe ClientApp do
   let(:entry) { Entry.create(uid: "http://example.com/1") }
   let(:client_app) { ClientApp.create(name: "mock-app", entry_id: entry.id, git_repo: "git@git") }
   let(:buddy_app) { ClientApp.create(name: "ch-mock-app", entry_id: entry.id, git_repo: "git@git") }
+
   it "creates from name" do
     client_app.name.should eq "mock-app"
   end

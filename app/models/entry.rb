@@ -9,13 +9,13 @@ class Entry < ActiveRecord::Base
   validates :uid, uniqueness: true
 
   class << self
-    def feed
-      G5HentryConsumer.parse(FEED_URL)
+    def feed(path_or_url=FEED_URL)
+      G5HentryConsumer.parse(path_or_url)
     end
 
-    def consume_feed
-      feed.entries.each do |hentry|
-        consume_entry
+    def consume_feed(path_or_url=FEED_URL)
+      feed(path_or_url).entries.each do |hentry|
+        consume_entry(hentry)
       end
     end
 
@@ -32,8 +32,8 @@ class Entry < ActiveRecord::Base
       end
     end
 
-    def find_or_create_from_entry(hentry)
-      find_or_create_by_uid(hentry.bookmark)
+    def find_or_initialize_from_hentry(hentry)
+      find_or_initialize_by_uid(hentry.bookmark)
     end
   end # class << self
 
