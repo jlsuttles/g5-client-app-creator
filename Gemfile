@@ -1,4 +1,5 @@
 source :rubygems
+source "https://gems.gemfury.com/#{ENV["GEMFURY_TOKEN"]}/"
 
 gem "rails", "3.2.7"
 gem "pg"
