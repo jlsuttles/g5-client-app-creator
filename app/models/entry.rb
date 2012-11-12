@@ -1,29 +1,45 @@
 class Entry < ActiveRecord::Base
+  FEED_URL = "http://g5-configurator.herokuapp.com/configurations"
+  TARGET_APP_NAME = "g5-client-app-creator"
+
   attr_accessible :name, :uid
-  APP_NAME = "g5-client-app-creator"
-  validates :uid, uniqueness: true
+
   has_many :client_apps
 
-  def self.consume_feed(file=nil)
-    file ||= "http://g5-configurator.herokuapp.com/configurations"
-    feed = G5HentryConsumer.parse(file)
-    self.parse_entries!(feed)
-  end
+  validates :uid, uniqueness: true
 
-  def self.targets_me?(url)
-    url =~ /^https?:\/\/w{3}?.?#{APP_NAME}.herokuapp.com/i
-  end
+  class << self
+    def feed
+      G5HentryConsumer.parse(FEED_URL)
+    end
 
-  def self.parse_entries!(feed)
-    feed = feed.entries.delete_if {|entry| !self.targets_me?(entry.content.target.first.url.first) }
-    feed.entries.map do |entry|
-      e = self.find_or_create_by_uid(entry.bookmark)
-      entry.content.configuration.each do |app|
-        e.client_apps.build(name: app.name, git_repo: app.url.first)
+    def consume_feed
+      feed.entries.each do |hentry|
+        consume_entry
       end
-      e.save
-      e
-    end.flatten
-  end
+    end
 
+    def targets_me?(hentry)
+      url = hentry.content.target.first.url.first
+      url =~ /^https?:\/\/w{3}?.?#{TARGET_APP_NAME}.herokuapp.com/i
+    end
+
+    def consume_entry(hentry)
+      if targets_me?(hentry)
+        entry = find_or_initialize_from_hentry(hentry)
+        entry.build_client_apps_from_hentry(hentry)
+        entry.save
+      end
+    end
+
+    def find_or_create_from_entry(hentry)
+      find_or_create_by_uid(hentry.bookmark)
+    end
+  end # class << self
+
+  def build_client_apps_from_hentry(hentry)
+    hentry.content.configuration.each do |app|
+      client_apps.build(name: app.name)
+    end
+  end
 end
