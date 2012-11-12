@@ -1,12 +1,11 @@
 source :rubygems
-# source "https://gems.gemfury.com/***REMOVED***/"
 
 gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
-gem "bcrypt-ruby", :require => "bcrypt"
-gem 'g5_hentry_consumer'
-gem 'github_heroku_deployer'
+
+gem "g5_hentry_consumer"
+gem "github_heroku_deployer"
 gem "resque", "~> 1.23.0"
 gem "foreman", "~> 0.60.2"
 
@@ -21,9 +20,8 @@ group :test do
 end
 
 group :development, :test do
-  gem "nifty-generators", "~> 0.4.6"
   gem "rspec-rails"
-  gem 'guard-rspec'
+  gem "guard-rspec"
 end
 
 group :production do
