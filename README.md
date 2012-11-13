@@ -1,17 +1,13 @@
-# G5 Hub
+# G5 Client App Creator
 
-A Rails application that consumes a feed consisting of hEntries as defined by [Microformats 2](http://microformats.org/wiki/microformats-2#h-entry) from [g5-configurator.herokuapp.com](http://g5-configurator.herokuapp.com). Each Entry is a set of instructions that the app creator will act on.
+* Consumes g5-configurator's feed
+* Creates g5-ch-* and g5-chd-* apps on Heroku
+* Deploys g5-ch-* and g5-chd-* from GitHub
 
 
 ## Setup
 
 1. Install all the required gems
-Add GEM_FURY_SECRET to ENV
-
-```bash
-export GEM_FURY_SECRET="SUPER_SECRET_KEY"
-```
-
 ```bash
 bundle
 ```
@@ -21,6 +17,33 @@ bundle
 cp config/database.example.yml config/database.yml
 vi config/database.yml # edit username
 rake db:create db:schema:load db:seed
+```
+
+1. Install [redis](http://redis.io/) and start it
+```bash
+brew install redis
+redis-server > ~/redis.log &
+```
+
+1. Create a new private key and add it to Github and Heroku
+    * [https://help.github.com/articles/generating-ssh-keys](https://help.github.com/articles/generating-ssh-keys)
+    * [https://devcenter.heroku.com/articles/keys](https://devcenter.heroku.com/articles/keys)
+
+
+1. Export environment variables
+```bash
+export HEROKU_USERNAME=your_username
+export HEROKU_API_KEY=your_api_key
+export ID_RSA=your_private_key
+```
+
+1. Use foreman to start the web and worker proccesses
+```bash
+foreman start
+```
+Or if you are using pow or something start the job queue
+```bash
+rake jobs:work
 ```
 
 ## Authors
@@ -40,9 +63,11 @@ rake db:create db:schema:load db:seed
 1. Create new Pull Request
 
 If you find bugs, have feature requests or questions, please
-[file an issue](https://github.com/G5/g5_client_hub_creator/issues).
+[file an issue](https://github.com/g5search/g5-client-app-creator/issues).
 
 
-## License
+## Specs
 
-???
+```bash
+guard
+```

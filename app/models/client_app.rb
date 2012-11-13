@@ -17,8 +17,7 @@ class ClientApp < ActiveRecord::Base
     GithubHerokuDeployer.deploy(
       github_repo: git_repo,
       heroku_app_name: name,
-      heroku_repo: heroku_repo,
-      repo_dir: "/tmp"
+      heroku_repo: heroku_repo
     )
   end
   
