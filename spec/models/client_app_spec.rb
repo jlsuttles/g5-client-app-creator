@@ -18,4 +18,9 @@ describe ClientApp do
     app.should_receive(:async_deploy).once
     app.save
   end
+  
+  it "should receive run once" do
+    GithubHerokuDeployer.should_receive(:heroku_run).once
+    client_app.run("rake db:migrate")
+  end
 end

@@ -3,6 +3,9 @@ class ClientAppDeployer
 
   def self.perform(client_app_id)
     client_app = ClientApp.find(client_app_id)
-    client_app.deploy
+    if client_app.deploy
+      ClientAppProcessRunner(client_app_id, "rake db:migrate")
+    end
   end
+  
 end

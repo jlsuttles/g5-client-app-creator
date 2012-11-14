@@ -18,6 +18,19 @@ class ClientApp < ActiveRecord::Base
     )
   end
   
+  def run(command)
+    GithubHerokuDeployer.heroku_run(command, 
+      github_repo: github_repo,
+      heroku_app_name: name,
+      heroku_repo: heroku_repo,
+      repo_dir: "/tmp"
+    )
+  end
+  
+  def async_run(command)
+    Resque.enqueue(ClientAppProcessRunner, self.id, command)
+  end
+  
   def github_repo
     "git@github.com:g5search/g5-client-hub"
   end

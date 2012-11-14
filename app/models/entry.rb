@@ -22,7 +22,7 @@ class Entry < ActiveRecord::Base
         e.client_apps.build(name: app.name)
       end
       e.save
-      puts e.errors.inspect
+      e
     end.flatten
   end
 
