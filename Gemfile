@@ -5,7 +5,11 @@ gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
 
-gem "g5_hentry_consumer"
+gem "quiet_assets", "~> 1.0.1"
+
+gem "hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer"
+gem "g5_hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer"
+
 gem "github_heroku_deployer", "~> 0.0.5"
 gem "resque", "~> 1.23.0"
 gem "foreman", "~> 0.60.2"
