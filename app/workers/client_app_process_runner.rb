@@ -3,6 +3,6 @@ class ClientAppProcessRunner
 
   def self.perform(client_app_id, command)
     client_app = ClientApp.find(client_app_id)
-    client_app.deploy
+    client_app.run(command)
   end
 end
