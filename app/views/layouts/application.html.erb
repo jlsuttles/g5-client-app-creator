@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title>G5 Client App Creator - <%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
@@ -9,12 +9,45 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <div id="container">
+    <div class="container-fluid">
+
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <!-- Be sure to leave the brand out there if you want it shown -->
+            <a class="brand" href="<%= root_path %>">G5 Client App Creator</a>
+
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li><a href="<%= client_apps_path %>">Client Apps</a></li>
+                <li><a href="/resque" target="_blank">Resque</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <%= flash_div name %>
       <% end %>
-      <%= content_tag :h1, yield(:title) if show_title? %>
+
+      <div class="row-fluid page-header">
+        <%= content_tag :h1, yield(:title), class: "span10" if show_title? %>
+        <%= content_tag :span, yield(:header_right), class: "span2" if show_header_right? %>
+      </div>
+
       <%= yield %>
+
     </div>
   </body>
 </html>

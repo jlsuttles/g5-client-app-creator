@@ -1,0 +1,20 @@
+<% title "Client Apps" %>
+
+<table>
+  <tr>
+    <th>App Type</th>
+    <th>Name</th>
+    <th>Sibling App Name</th>
+    <th>Entry Name</th>
+    <th>Entry UID</th>
+  </tr>
+  <% for client_app in @client_apps %>
+    <tr>
+      <td><%= client_app.app_type %></td>
+      <td><%= client_app.name %></td>
+      <td><%= client_app.sibling_app.try :name %></td>
+      <td><%= client_app.entry.try :name %></td>
+      <td><%= client_app.entry.try :uid %></td>
+    </tr>
+  <% end %>
+</table>
