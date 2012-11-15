@@ -13,7 +13,7 @@ describe Entry do
     def hentry_with_target(target)
       feed = G5HentryConsumer.parse("spec/support/example_feed.html")
       hentry = feed.entries.first
-      hentry.content.target.first.url = target
+      hentry.content.first.targets = [target]
       hentry
     end
   end

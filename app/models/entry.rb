@@ -20,9 +20,11 @@ class Entry < ActiveRecord::Base
     end
 
     def targets_me?(hentry)
-      url = hentry.content.target.first.url if hentry.is_a?(HentryConsumer::HEntry)
-      url = url.first if url.is_a?(Array)
-      !!(url && url =~ /^#{TARGET_URL}$/i)
+      if hentry.nil? || hentry.is_a?(String)
+        hentry == TARGET_URL
+      else
+        hentry.content.first.targets.include? TARGET_URL
+      end
     end
 
     def consume_entry(hentry)
