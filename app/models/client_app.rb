@@ -1,6 +1,6 @@
 class ClientApp < ActiveRecord::Base
-  attr_accessible :name, :app_type, :entry_id, :sibling_app
-  validates :entry_id, :name, presence: true
+  attr_accessible :name, :app_type, :entry_id, :sibling_app, :git_repo
+  validates :git_repo, :entry_id, :name, presence: true
   validates :name, uniqueness: {scope: :app_type}
   belongs_to :entry
   
@@ -11,7 +11,7 @@ class ClientApp < ActiveRecord::Base
 
   def deploy
     GithubHerokuDeployer.deploy(
-      github_repo: github_repo,
+      github_repo: git_repo,
       heroku_app_name: name,
       heroku_repo: heroku_repo,
       repo_dir: "/tmp"
@@ -20,7 +20,7 @@ class ClientApp < ActiveRecord::Base
   
   def run(command)
     GithubHerokuDeployer.heroku_run(command, 
-      github_repo: github_repo,
+      github_repo: git_repo,
       heroku_app_name: name,
       heroku_repo: heroku_repo,
       repo_dir: "/tmp"
@@ -29,10 +29,6 @@ class ClientApp < ActiveRecord::Base
   
   def async_run(command)
     Resque.enqueue(ClientAppProcessRunner, self.id, command)
-  end
-  
-  def github_repo
-    "git@github.com:g5search/g5-client-hub"
   end
   
   def heroku_repo

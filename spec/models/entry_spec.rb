@@ -38,6 +38,10 @@ describe Entry do
         it "has 2 client apps" do
           subject.client_apps.should have(2).things(ClientApp)
         end
+        
+        it "should have a git repo" do
+          subject.client_apps.first.git_repo.should eq "git@git"
+        end
 
       end
     end

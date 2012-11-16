@@ -19,7 +19,7 @@ class Entry < ActiveRecord::Base
     feed.entries.map do |entry|
       e = self.find_or_create_by_uid(entry.bookmark)
       entry.content.configuration.each do |app|
-        e.client_apps.build(name: app.name)
+        e.client_apps.build(name: app.name, git_repo: app.url.first)
       end
       e.save
       e
