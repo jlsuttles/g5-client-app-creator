@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  FEED_URL = "http://g5-configurator.dev/instructions"
+  FEED_URL = "http://g5-configurator.herokuapp.com/instructions"
   TARGET_URL = "http://g5-client-app-creator.herokuapp.com"
 
   attr_accessible :name, :uid
