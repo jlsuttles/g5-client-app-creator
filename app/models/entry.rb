@@ -43,7 +43,7 @@ class Entry < ActiveRecord::Base
 
   def build_client_apps_from_hentry(hentry)
     hentry.content.first.apps.each do |app|
-      client_apps.build(uid: app.uid, name: app.name.first)
+      client_apps.build(uid: app.uid, name: app.name.first, git_repo: app.git_repo.first)
     end
   end
 end
