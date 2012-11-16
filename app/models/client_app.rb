@@ -1,10 +1,10 @@
 class ClientApp < ActiveRecord::Base
-  attr_accessible :name, :app_type, :entry_id, :sibling_app, :git_repo
+  attr_accessible :uid, :name, :app_type, :entry_id, :sibling_app, :git_repo
 
   belongs_to :entry
   
+  # validates :entry_id, presence: true
   validates :git_repo, presence: true
-  validates :entry_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :app_type }
 
   after_create :async_deploy

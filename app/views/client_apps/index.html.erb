@@ -4,17 +4,15 @@
   <tr>
     <th>App Type</th>
     <th>Name</th>
-    <th>Sibling App Name</th>
-    <th>Entry Name</th>
+    <th>UID</th>
     <th>Entry UID</th>
   </tr>
   <% for client_app in @client_apps %>
     <tr>
       <td><%= client_app.app_type %></td>
       <td><%= client_app.name %></td>
-      <td><%= client_app.sibling_app.try :name %></td>
-      <td><%= client_app.entry.try :name %></td>
-      <td><%= client_app.entry.try :uid %></td>
+      <td><%= link_to client_app.uid, client_app.uid %></td>
+      <td><%= link_to client_app.entry.try(:uid), client_app.entry.try(:uid) %></td>
     </tr>
   <% end %>
 </table>

@@ -29,7 +29,7 @@ describe Entry do
     describe "parsed entry" do
       subject { feed.last }
 
-      its(:uid) { should eq "http://g5-configurator.herokuapp.com/configurations/2" }
+      its(:uid) { should eq "http://g5-configurator.dev/instructions/35" }
 
       it "is a entry" do
         subject.should be_an_instance_of Entry
@@ -42,7 +42,7 @@ describe Entry do
         end
 
         it "has 2 client apps" do
-          subject.client_apps.should have(2).things(ClientApp)
+          subject.client_apps.should have(1).things(ClientApp)
         end
         
         it "should have a git repo" do

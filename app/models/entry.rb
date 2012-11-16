@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  FEED_URL = "http://g5-configurator.herokuapp.com/configurations"
+  FEED_URL = "http://g5-configurator.dev/instructions"
   TARGET_URL = "http://g5-client-app-creator.herokuapp.com"
 
   attr_accessible :name, :uid
@@ -42,8 +42,8 @@ class Entry < ActiveRecord::Base
   end # class << self
 
   def build_client_apps_from_hentry(hentry)
-    hentry.content.configuration.each do |app|
-      client_apps.build(name: app.name)
+    hentry.content.first.apps.each do |app|
+      client_apps.build(uid: app.uid, name: app.name.first)
     end
   end
 end

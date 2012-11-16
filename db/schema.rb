@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115232711) do
+ActiveRecord::Schema.define(:version => 20121116005306) do
 
   create_table "client_apps", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121115232711) do
     t.integer  "sibling_app_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "uid"
     t.string   "git_repo"
   end
 
