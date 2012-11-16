@@ -8,8 +8,8 @@ gem "jquery-rails"
 gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
 
-gem "hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer"
-gem "g5_hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer"
+gem "hentry_consumer", "~> 0.5.3"
+gem "g5_hentry_consumer", "~> 0.2.0"
 
 gem "github_heroku_deployer", "~> 0.0.5"
 gem "resque", "~> 1.23.0"
