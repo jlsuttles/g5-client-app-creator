@@ -14,24 +14,21 @@ class ClientApp < ActiveRecord::Base
   end
 
   def deploy
-    GithubHerokuDeployer.deploy(
-      github_repo: git_repo,
-      heroku_app_name: name,
-      heroku_repo: heroku_repo
-    )
+    GithubHerokuDeployer.deploy(deployer_options)
   end
   
-  def run(command)
-    GithubHerokuDeployer.heroku_run(command, 
-      github_repo: git_repo,
-      heroku_app_name: name,
-      heroku_repo: heroku_repo,
-      repo_dir: "/tmp"
-    )
+  def heroku_run(command)
+    GithubHerokuDeployer.heroku_run(command, deployer_options)
   end
-  
-  def async_run(command)
-    Resque.enqueue(ClientAppProcessRunner, self.id, command)
+
+  def heroku_config_set(values)
+    GithubHerokuDeployer.heroku_config_set(values, deployer_options)
+  end
+
+  def deployer_options
+    { github_repo: git_repo,
+      heroku_app_name: name,
+      heroku_repo: heroku_repo }
   end
   
   def heroku_repo

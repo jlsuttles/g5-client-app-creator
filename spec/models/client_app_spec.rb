@@ -20,8 +20,13 @@ describe ClientApp do
     app.save
   end
   
-  it "should receive run once" do
+  it "should receive heroku_run once" do
     GithubHerokuDeployer.should_receive(:heroku_run).once
-    client_app.run("rake db:migrate")
+    client_app.heroku_run("rake db:migrate")
+  end
+
+  it "should receive heroku_config_set once" do
+    GithubHerokuDeployer.should_receive(:heroku_config_set).once
+    client_app.heroku_config_set("FOO" => "bar")
   end
 end

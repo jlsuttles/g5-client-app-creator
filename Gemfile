@@ -11,7 +11,7 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 gem "hentry_consumer", "~> 0.5.3"
 gem "g5_hentry_consumer", "~> 0.2.0"
 
-gem "github_heroku_deployer", "~> 0.0.5"
+gem "github_heroku_deployer", "~> 0.1.0"
 gem "resque", "~> 1.23.0"
 gem "foreman", "~> 0.60.2"
 
