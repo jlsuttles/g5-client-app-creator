@@ -64,10 +64,7 @@ GEM
       hentry_consumer (~> 0.5.2)
     git (1.2.5)
     git-ssh-wrapper (0.1.0)
-    github_heroku_deployer (0.1.0)
-      git (~> 1.2.5)
-      git-ssh-wrapper (~> 0.1.0)
-      heroku-api (~> 0.3.5)
+    github_heroku_deployer (0.1.1)
     guard (1.5.4)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
@@ -196,9 +193,12 @@ DEPENDENCIES
   faker (~> 1.1.2)
   foreman (~> 0.60.2)
   g5_hentry_consumer (~> 0.2.2)
-  github_heroku_deployer (~> 0.1.0)
+  git
+  git-ssh-wrapper
+  github_heroku_deployer (~> 0.1.1)
   guard-rspec (~> 2.1.0)
   hentry_consumer (~> 0.5.3)
+  heroku-api
   jquery-rails
   pg
   quiet_assets (~> 1.0.1)
