@@ -1,18 +1,22 @@
 <% title "Client Apps" %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>UID</th>
-    <th>Client UID</th>
-    <th>Instruction UID</th>
-  </tr>
-  <% for client_app in @client_apps %>
+<table class="table table-striped">
+  <thead>
     <tr>
-      <td><%= client_app.name %></td>
-      <td><%= link_to client_app.uid, client_app.uid %></td>
-      <td><%= link_to client_app.client_uid, client_app.client_uid %></td>
-      <td><%= link_to client_app.entry.try(:uid), client_app.entry.try(:uid) %></td>
+      <th>Name</th>
+      <th>UID</th>
+      <th>Client UID</th>
+      <th>Instruction UID</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @client_apps.each do |client_app| %>
+      <tr>
+        <td><%= client_app.name %></td>
+        <td><%= link_to client_app.uid, client_app.uid %></td>
+        <td><%= link_to client_app.client_uid, client_app.client_uid %></td>
+        <td><%= link_to client_app.entry.try(:uid), client_app.entry.try(:uid) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
