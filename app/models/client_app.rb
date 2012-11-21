@@ -17,6 +17,10 @@ class ClientApp < ActiveRecord::Base
     GithubHerokuDeployer.deploy(deployer_options)
   end
   
+  def heroku_restart
+    GithubHerokuDeployer.heroku_restart(deployer_options)
+  end
+
   def heroku_destroy
     GithubHerokuDeployer.heroku_destroy(deployer_options)
   end
