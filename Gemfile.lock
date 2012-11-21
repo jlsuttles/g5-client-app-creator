@@ -64,7 +64,7 @@ GEM
       hentry_consumer (~> 0.5.2)
     git (1.2.5)
     git-ssh-wrapper (0.1.0)
-    github_heroku_deployer (0.1.4)
+    github_heroku_deployer (0.1.5)
     guard (1.5.4)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
@@ -195,7 +195,7 @@ DEPENDENCIES
   g5_hentry_consumer (~> 0.2.2)
   git
   git-ssh-wrapper
-  github_heroku_deployer (~> 0.1.4)
+  github_heroku_deployer (~> 0.1.5)
   guard-rspec (~> 2.1.0)
   hentry_consumer (~> 0.5.3)
   heroku-api
