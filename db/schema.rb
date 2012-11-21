@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116005306) do
+ActiveRecord::Schema.define(:version => 20121121044509) do
 
   create_table "client_apps", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20121116005306) do
     t.datetime "updated_at",     :null => false
     t.string   "uid"
     t.string   "git_repo"
+    t.string   "client_uid"
   end
 
   add_index "client_apps", ["entry_id"], :name => "index_client_apps_on_entry_id"
