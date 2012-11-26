@@ -33,6 +33,10 @@ class ClientApp < ActiveRecord::Base
     GithubHerokuDeployer.heroku_config_set(values, deployer_options)
   end
 
+  def heroku_addon_add(addon)
+    GithubHerokuDeployer.heroku_addon_add(addon)
+  end
+
   def deployer_options
     { github_repo: git_repo,
       heroku_app_name: name,

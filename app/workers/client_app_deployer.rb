@@ -28,6 +28,8 @@ class ClientAppDeployer
         client_app.heroku_run("rake seed_client")
       end
 
+      client_app.heroku_addon_add("redistogo:nano")
+
       puts "Done deploying #{client_app.name}"
     end
   end

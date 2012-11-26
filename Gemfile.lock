@@ -64,7 +64,7 @@ GEM
       hentry_consumer (~> 0.5.2)
     git (1.2.5)
     git-ssh-wrapper (0.1.0)
-    github_heroku_deployer (0.1.6)
+    github_heroku_deployer (0.1.7)
       git (~> 1.2.5)
       git-ssh-wrapper (~> 0.1.0)
       heroku-api (~> 0.3.5)
@@ -199,7 +199,7 @@ DEPENDENCIES
   faker (~> 1.1.2)
   foreman (~> 0.60.2)
   g5_hentry_consumer (~> 0.2.3)
-  github_heroku_deployer (~> 0.1.6)
+  github_heroku_deployer (~> 0.1.7)
   guard-rspec (~> 2.1.0)
   heroku_resque_autoscaler (~> 0.1.0)
   jquery-rails
