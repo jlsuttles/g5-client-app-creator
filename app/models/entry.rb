@@ -13,6 +13,10 @@ class Entry < ActiveRecord::Base
       G5HentryConsumer.parse(path_or_url)
     end
 
+    def async_consume_feed
+      Resque.enqueue(EntryConsumer)
+    end
+
     def consume_feed(path_or_url=FEED_URL)
       feed(path_or_url).entries.map do |hentry|
         consume_entry(hentry)
