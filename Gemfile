@@ -7,16 +7,10 @@ gem "jquery-rails"
 
 gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
-
-gem "hentry_consumer", "~> 0.5.3"
-gem "g5_hentry_consumer", "~> 0.2.2"
-
-gem "git"
-gem "git-ssh-wrapper"
-gem "heroku-api"
-gem "github_heroku_deployer", "~> 0.1.5"
-gem "resque", "~> 1.23.0"
 gem "foreman", "~> 0.60.2"
+gem "heroku_resque_autoscaler", "~> 0.1.0"
+gem "g5_hentry_consumer", "~> 0.2.3"
+gem "github_heroku_deployer", "~> 0.1.6"
 
 group :assets do
   gem "sass-rails", "~> 3.2.3"
