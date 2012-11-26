@@ -34,7 +34,7 @@ class ClientApp < ActiveRecord::Base
   end
 
   def heroku_addon_add(addon)
-    GithubHerokuDeployer.heroku_addon_add(addon)
+    GithubHerokuDeployer.heroku_addon_add(addon, deployer_options)
   end
 
   def deployer_options
