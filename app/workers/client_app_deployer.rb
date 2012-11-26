@@ -17,7 +17,7 @@ class ClientAppDeployer
         "HEROKU_API_KEY" => ENV["HEROKU_API_KEY"],
         "HEROKU_APP_NAME" => client_app.name,
         "HEROKU_USERNAME" => ENV["HEROKU_USERNAME"],
-        "ID_RSA" => ENV["ID_RSA"],
+        "ID_RSA" => ENV["ID_RSA"]
       )
 
       # Client Hubs
@@ -28,6 +28,7 @@ class ClientAppDeployer
         client_app.heroku_run("rake seed_client")
       end
 
+      puts "Adding resdistogo:nano"
       client_app.heroku_addon_add("redistogo:nano")
 
       puts "Done deploying #{client_app.name}"
