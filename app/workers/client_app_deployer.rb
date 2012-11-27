@@ -23,7 +23,7 @@ class ClientAppDeployer
       # Client Hubs
       if client_app.name.include? "g5-ch-"
         puts "Taking a nap..."
-        sleep 10
+        sleep 30
         puts "Seeding database..."
         client_app.heroku_run("rake seed_client")
       end
