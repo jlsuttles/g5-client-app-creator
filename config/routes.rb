@@ -5,6 +5,6 @@ G5ClientAppCreator::Application.routes.draw do
 
   resources :client_apps, only: [:index]
 
-  post "consume_feed" => "webhooks#consume_feed"
+  post "webhooks/g5-configurator" => "webhooks#g5_configurator"
   root to: "client_apps#index"
 end

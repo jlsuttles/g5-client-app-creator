@@ -1,5 +1,5 @@
 class WebhooksController < ApplicationController
-  def consume_feed
+  def g5_configurator
     Entry.async_consume_feed
     render json: {}, status: :ok
   end
