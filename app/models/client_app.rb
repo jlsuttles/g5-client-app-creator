@@ -2,8 +2,7 @@ class ClientApp < ActiveRecord::Base
   attr_accessible :uid, :client_uid, :name, :app_type, :entry_id, :sibling_app, :git_repo
 
   belongs_to :entry
-  
-  # validates :entry_id, presence: true
+
   validates :git_repo, presence: true
   validates :name, presence: true, uniqueness: { scope: :app_type }
 
@@ -16,7 +15,7 @@ class ClientApp < ActiveRecord::Base
   def deploy
     GithubHerokuDeployer.deploy(deployer_options)
   end
-  
+
   def heroku_restart
     GithubHerokuDeployer.heroku_restart(deployer_options)
   end
@@ -42,12 +41,28 @@ class ClientApp < ActiveRecord::Base
       heroku_app_name: name,
       heroku_repo: heroku_repo }
   end
-  
+
   def heroku_repo
     "git@heroku.com:#{name}.git"
   end
-  
+
   def siblings
     entry.client_apps.drop_while { |k| k == self }
+  end
+
+  def buddy
+    ClientApp.where("id != ?", id).find_by_client_uid(client_uid)
+  end
+
+  def buddy_name
+    buddy.name if buddy
+  end
+
+  def buddy_heroku_repo
+    buddy.heroku_repo if buddy
+  end
+
+  def buddy_git_repo
+    buddy.git_repo if buddy
   end
 end

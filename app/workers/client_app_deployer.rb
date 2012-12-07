@@ -13,11 +13,20 @@ class ClientAppDeployer
 
       puts "Setting config variables..."
       client_app.heroku_config_set(
+        # for targeting
+        "UID" => client_app.uid,
+        # for seeding client info
         "G5_CLIENT_UID" => client_app.client_uid,
-        "HEROKU_API_KEY" => ENV["HEROKU_API_KEY"],
+        # for autoscaling
         "HEROKU_APP_NAME" => client_app.name,
+        # for deploying
+        "HEROKU_API_KEY" => ENV["HEROKU_API_KEY"],
         "HEROKU_USERNAME" => ENV["HEROKU_USERNAME"],
-        "ID_RSA" => ENV["ID_RSA"]
+        "ID_RSA" => ENV["ID_RSA"],
+        # for deploying buddy
+        "BUDDY_HEROKU_APP_NAME" => client_app.buddy_name,
+        "BUDDY_HEROKU_REPO" => client_app.buddy_heroku_repo,
+        "BUDDY_GITHUB_REPO"=> client_app.buddy_git_repo,
       )
 
       # Client Hubs
