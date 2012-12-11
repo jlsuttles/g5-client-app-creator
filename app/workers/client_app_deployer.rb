@@ -31,12 +31,13 @@ class ClientAppDeployer
         "BUDDY_GITHUB_REPO"=> client_app.buddy_git_repo,
       )
 
-      # Client Hubs
+      puts "Taking a nap..."
+      sleep 30
       if client_app.name.include? "g5-ch-"
-        puts "Taking a nap..."
-        sleep 30
         puts "Seeding database..."
         client_app.heroku_run("rake seed_client")
+      else if client_app.name.include? "g5-chd-"
+        client_app.heroku_run("rake sibling:seed")
       end
 
       puts "Adding resdistogo:nano"
