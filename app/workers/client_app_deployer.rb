@@ -42,7 +42,7 @@ class ClientAppDeployer
         client_app.heroku_run("rake seed_client")
       elsif client_app.name.include? "g5-chd-"
         puts "Seeding database..."
-        client_app.heroku_run("rake sibling:seed")
+        client_app.heroku_run("rake sibling:consume")
       end
 
       puts "Done deploying #{client_app.name}"
