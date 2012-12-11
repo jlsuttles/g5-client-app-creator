@@ -25,10 +25,6 @@ class ClientAppDeployer
         "HEROKU_API_KEY" => ENV["HEROKU_API_KEY"],
         "HEROKU_USERNAME" => ENV["HEROKU_USERNAME"],
         "ID_RSA" => ENV["ID_RSA"],
-        # for deploying buddy
-        "BUDDY_HEROKU_APP_NAME" => client_app.buddy_name,
-        "BUDDY_HEROKU_REPO" => client_app.buddy_heroku_repo,
-        "BUDDY_GITHUB_REPO"=> client_app.buddy_git_repo,
       )
 
       sleep 15
@@ -39,6 +35,7 @@ class ClientAppDeployer
       if client_app.name.include? "g5-ch-"
         puts "Seeding database..."
         client_app.heroku_run("rake seed_client")
+        client_app.heroku_run("rake sibling:consume")
       elsif client_app.name.include? "g5-chd-"
         puts "Seeding database..."
         client_app.heroku_run("rake sibling:consume")

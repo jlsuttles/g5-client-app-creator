@@ -50,9 +50,9 @@ class Entry < ActiveRecord::Base
     hentry.content.first.apps.each do |app|
       client_apps.build(
         uid: app.uid, 
-        client_uid: app.client_uid.first,
-        name: app.name.first, 
-        git_repo: app.git_repo.first
+        client_uid: app.client_uid.try(:first),
+        name: app.name.try(:first), 
+        git_repo: app.git_repo.try(:first)
       )
     end
   end

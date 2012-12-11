@@ -49,20 +49,4 @@ class ClientApp < ActiveRecord::Base
   def siblings
     entry.client_apps.drop_while { |k| k == self }
   end
-
-  def buddy
-    ClientApp.where("id != ?", id).find_by_client_uid(client_uid)
-  end
-
-  def buddy_name
-    buddy.name if buddy
-  end
-
-  def buddy_heroku_repo
-    buddy.heroku_repo if buddy
-  end
-
-  def buddy_git_repo
-    buddy.git_repo if buddy
-  end
 end
