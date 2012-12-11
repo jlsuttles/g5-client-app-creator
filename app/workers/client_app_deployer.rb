@@ -15,6 +15,8 @@ class ClientAppDeployer
       client_app.heroku_config_set(
         # for targeting
         "UID" => client_app.uid,
+        # for sibling deployer
+        "MAIN_APP_UID" => client_app.uid,
         # for seeding client info
         "G5_CLIENT_UID" => client_app.client_uid,
         # for autoscaling
