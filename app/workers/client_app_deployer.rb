@@ -31,17 +31,19 @@ class ClientAppDeployer
         "BUDDY_GITHUB_REPO"=> client_app.buddy_git_repo,
       )
 
+      puts "Adding resdistogo:nano"
+      client_app.heroku_addon_add("redistogo:nano")
+
       puts "Taking a nap..."
       sleep 30
+
       if client_app.name.include? "g5-ch-"
         puts "Seeding database..."
         client_app.heroku_run("rake seed_client")
       elsif client_app.name.include? "g5-chd-"
+        puts "Seeding database..."
         client_app.heroku_run("rake sibling:seed")
       end
-
-      puts "Adding resdistogo:nano"
-      client_app.heroku_addon_add("redistogo:nano")
 
       puts "Done deploying #{client_app.name}"
     end
