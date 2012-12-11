@@ -36,7 +36,7 @@ class ClientAppDeployer
       if client_app.name.include? "g5-ch-"
         puts "Seeding database..."
         client_app.heroku_run("rake seed_client")
-      else if client_app.name.include? "g5-chd-"
+      elsif client_app.name.include? "g5-chd-"
         client_app.heroku_run("rake sibling:seed")
       end
 
