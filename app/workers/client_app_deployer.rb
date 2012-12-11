@@ -31,11 +31,10 @@ class ClientAppDeployer
         "BUDDY_GITHUB_REPO"=> client_app.buddy_git_repo,
       )
 
+      sleep 15
       puts "Adding resdistogo:nano"
       client_app.heroku_addon_add("redistogo:nano")
-
-      puts "Taking a nap..."
-      sleep 30
+      sleep 15
 
       if client_app.name.include? "g5-ch-"
         puts "Seeding database..."
