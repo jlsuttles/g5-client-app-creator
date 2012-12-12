@@ -46,6 +46,10 @@ class ClientApp < ActiveRecord::Base
     "git@heroku.com:#{name}.git"
   end
 
+  def heroku_url
+    "http://#{name}.herokuapp.com"
+  end
+
   def siblings
     entry.client_apps.drop_while { |k| k == self }
   end
