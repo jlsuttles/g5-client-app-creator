@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20121121044509) do
     t.integer  "sibling_app_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.string   "uid"
     t.string   "git_repo"
+    t.string   "uid"
     t.string   "client_uid"
   end
 

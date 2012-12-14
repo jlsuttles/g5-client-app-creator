@@ -25,6 +25,21 @@ describe Entry do
     it "has elements" do
       subject.should have(1).thing
     end
+    
+    describe "cache" do
+      let(:feed) { Entry.consume_feed('spec/support/example_feed.html') }
+      
+      it "doesn't return anything" do
+        Entry.stub(:last_modified_at) { Time.now }
+        feed.entries.should have(0).things
+      end
+      
+      it "returns true" do
+        HentryConsumer::HFeed.any_instance.stub(:open).
+          and_raise( OpenURI::HTTPError.new("304 Not Modified", nil) )
+        feed.should be_true
+      end
+    end
 
     describe "parsed entry" do
       subject { feed.last }

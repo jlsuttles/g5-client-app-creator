@@ -25,6 +25,8 @@ class Entry < ActiveRecord::Base
       feed(path_or_url).entries.map do |hentry|
         consume_entry(hentry)
       end.compact
+    rescue OpenURI::HTTPError, "304 Not Modified"
+      true
     end
 
     def targets_me?(hentry)
@@ -52,7 +54,6 @@ class Entry < ActiveRecord::Base
 
   def build_client_apps_from_hentry(hentry)
     hentry.content.first.apps.each do |app|
-      puts app.inspect
       client_apps.build(
         uid: app.uid, 
         client_uid: app.client_uid.try(:first),
