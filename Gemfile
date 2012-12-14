@@ -10,7 +10,7 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 
 gem "foreman", "~> 0.60.2"
 gem "heroku_resque_autoscaler", "~> 0.1.0"
-gem "g5_hentry_consumer", "~> 0.2.3"
+gem "g5_hentry_consumer", "~> 0.5.0"
 gem "github_heroku_deployer", "~> 0.1.9"
 
 group :assets do

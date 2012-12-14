@@ -10,11 +10,15 @@ class Entry < ActiveRecord::Base
 
   class << self
     def feed(path_or_url=FEED_URL)
-      G5HentryConsumer.parse(path_or_url)
+      G5HentryConsumer.parse(path_or_url, last_modified_at: last_modified_at)
     end
 
     def async_consume_feed
       Resque.enqueue(EntryConsumer)
+    end
+    
+    def last_modified_at
+      scoped.maximum(:created_at)
     end
 
     def consume_feed(path_or_url=FEED_URL)
@@ -48,6 +52,7 @@ class Entry < ActiveRecord::Base
 
   def build_client_apps_from_hentry(hentry)
     hentry.content.first.apps.each do |app|
+      puts app.inspect
       client_apps.build(
         uid: app.uid, 
         client_uid: app.client_uid.try(:first),
