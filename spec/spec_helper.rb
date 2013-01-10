@@ -1,17 +1,33 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'rspec/autorun'
+require 'rubygems'
+require 'spork'
 
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Spork.prefork do
+  unless ENV['DRB']
+    require 'simplecov'
+    SimpleCov.start 'rails'
+  end
 
-RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
-  config.infer_base_class_for_anonymous_controllers = false
-  config.order = "random"
-  config.before(:each) { Entry.delete_all; ClientApp.delete_all }
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  require 'rspec/autorun'
+
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+  RSpec.configure do |config|
+    config.use_transactional_fixtures = true
+    config.infer_base_class_for_anonymous_controllers = false
+    config.order = "random"
+  end
+
+  Spork.trap_method(Rails::Application, :eager_load!)
+  require File.expand_path("../../config/environment", __FILE__)
+  Rails.application.railties.all { |r| r.eager_load! }
+end
+
+Spork.each_run do
+  if ENV['DRB']
+    require 'simplecov'
+    SimpleCov.start 'rails'
+  end
 end

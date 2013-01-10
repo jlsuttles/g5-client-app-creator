@@ -21,8 +21,10 @@ group :assets do
 end
 
 group :development, :test do
+  gem "simplecov", "~> 0.7.1", require: false
   gem "rspec-rails", "~> 2.11.4"
   gem "guard-rspec", "~> 2.1.0"
+  gem "spork"
   gem "rb-fsevent", "~> 0.9.2"
   gem "debugger", "~> 1.2.1"
   gem "fabrication", "~> 2.5.0"
