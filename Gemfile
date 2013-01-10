@@ -5,6 +5,7 @@ gem "rails", "3.2.11"
 gem "pg"
 gem "jquery-rails"
 
+gem "rails-default-database", "~> 1.0.6"
 gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
 
