@@ -19,7 +19,7 @@ module LayoutHelper
 
   def flash_div(level)
     if flash[level].present?
-      bootstrap_level = (level == notice ? "info" : level)
+      bootstrap_level = (level.to_s == "notice" ? "info" : level)
       content_tag "div", class: "alert alert-#{bootstrap_level}" do
         content_tag "p", flash[level]
       end
