@@ -1,8 +1,11 @@
 # G5 Client App Creator
 
-* Consumes g5-configurator's feed
-* Creates g5-ch-* and g5-chd-* apps on Heroku
-* Deploys g5-ch-* and g5-chd-* from GitHub
+Provisions and deploys Apps automagically from Instruction Feed.
+
+* Receives Webhook from Instruction Feed Publisher
+* Consumes Instruction Feed
+* Provisions Apps
+* Deploys Apps
 
 
 ## Setup
@@ -12,8 +15,8 @@
 bundle
 ```
 
-1. Set up your database. 
-[rails-default-database](https://github.com/tpope/rails-default-database) 
+1. Set up your database.
+[rails-default-database](https://github.com/tpope/rails-default-database)
 automatically uses sensible defaults for the primary ActiveRecord database.
 ```bash
 rake db:setup
@@ -70,4 +73,12 @@ If you find bugs, have feature requests or questions, please
 
 ```bash
 guard
+```
+
+
+## Coverage
+
+```bash
+rspec spec
+open coverage/index.html
 ```
