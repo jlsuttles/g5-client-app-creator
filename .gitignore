@@ -19,3 +19,4 @@
 .rvmrc
 .rspec
 .DS_Store
+/coverage
