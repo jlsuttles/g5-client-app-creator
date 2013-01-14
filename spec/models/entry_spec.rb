@@ -18,6 +18,14 @@ describe Entry do
     end
   end
 
+  describe ".async_consume_feed" do
+    it "queues feed consusmption" do
+      Resque.stub(:enqueue)
+      Resque.should_receive(:enqueue).with(EntryConsumer)
+      Entry.async_consume_feed
+    end
+  end
+
   describe "consuming feed" do
     let(:feed) { Entry.consume_feed('spec/support/example_feed.html') }
     subject { feed }
@@ -25,15 +33,15 @@ describe Entry do
     it "has elements" do
       subject.should have(1).thing
     end
-    
+
     describe "cache" do
       let(:feed) { Entry.consume_feed('spec/support/example_feed.html') }
-      
+
       it "doesn't return anything" do
         Entry.stub(:last_modified_at) { Time.now }
         feed.entries.should have(0).things
       end
-      
+
       it "returns true" do
         HentryConsumer::HFeed.any_instance.stub(:open).
           and_raise( OpenURI::HTTPError.new("304 Not Modified", nil) )
@@ -49,7 +57,7 @@ describe Entry do
       it "is a entry" do
         subject.should be_an_instance_of Entry
       end
-      
+
       describe "apps" do
 
         it "should have a client hub" do
@@ -59,7 +67,7 @@ describe Entry do
         it "has 2 client apps" do
           subject.client_apps.should have(1).things(ClientApp)
         end
-        
+
         it "should have a git repo" do
           subject.client_apps.first.git_repo.should eq "git@git"
         end

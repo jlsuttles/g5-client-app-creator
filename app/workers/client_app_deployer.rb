@@ -27,10 +27,10 @@ class ClientAppDeployer
         "ID_RSA" => ENV["ID_RSA"],
       )
 
-      sleep 15
+      sleep 15 unless Rails.env.test?
       puts "Adding resdistogo:nano"
       client_app.heroku_addon_add("redistogo:nano")
-      sleep 15
+      sleep 15 unless Rails.env.test?
 
       if client_app.name.include? "g5-ch-"
         puts "Seeding database..."
