@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121044509) do
+ActiveRecord::Schema.define(:version => 20130214221059) do
 
   create_table "client_apps", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,37 @@ ActiveRecord::Schema.define(:version => 20121121044509) do
     t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "sibling_deploys", :force => true do |t|
+    t.integer  "sibling_id"
+    t.integer  "instruction_id"
+    t.boolean  "manual"
+    t.string   "state"
+    t.string   "git_repo"
+    t.string   "heroku_repo"
+    t.string   "heroku_app_name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "sibling_instructions", :force => true do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "published_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "siblings", :force => true do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.string   "git_repo"
+    t.string   "heroku_repo"
+    t.string   "heroku_app_name"
+    t.boolean  "main_app"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
