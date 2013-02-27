@@ -35,6 +35,8 @@ redis-server > ~/redis.log &
 
 1. Export environment variables
 ```bash
+export G5_CONFIGURATOR_FEED_URL=http://g5-configurator.herokuapp.com/
+export G5_CLIENT_APP_CREATOR_UID=http://g5-configurator.herokuapp.com/apps/g5-client-app-creator
 export HEROKU_USERNAME=your_username
 export HEROKU_API_KEY=your_api_key
 export ID_RSA=your_private_key
