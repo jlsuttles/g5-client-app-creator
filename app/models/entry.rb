@@ -33,6 +33,10 @@ class Entry < ActiveRecord::Base
       targets && targets.include?(target_uid)
     end
 
+    def instruction(hentry)
+      Microformats2.parse(hentry.content.to_s).card
+    end
+
     def find_or_create_from_hentry(hentry)
       find_or_create_by_uid(hentry.uid.to_s) do |entry|
         app = instruction(hentry).g5_app.format
@@ -47,10 +51,6 @@ class Entry < ActiveRecord::Base
           ]
         end
       end
-    end
-
-    def instruction(hentry)
-      Microformats2.parse(hentry.content.to_s).card
     end
   end # class << self
 end
