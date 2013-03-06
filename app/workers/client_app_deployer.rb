@@ -5,31 +5,31 @@ class ClientAppDeployer
   def self.perform(client_app_id)
     client_app = ClientApp.find(client_app_id)
 
-    puts "Deploying #{client_app.name}..."
+    Rails.logger.info "Deploying #{client_app.name}..."
     if client_app.deploy
 
-      puts "Migrating..."
+      Rails.logger.info "Migrating..."
       client_app.heroku_run("rake db:migrate")
 
       sleep 15 unless Rails.env.test?
-      puts "Adding resdistogo:nano"
+      Rails.logger.info "Adding resdistogo:nano"
       client_app.heroku_addon_add("redistogo:nano")
       sleep 15 unless Rails.env.test?
 
-      setup_client_hub(client_app) if client_app_name.include? "g5-ch"
-      setup_client_service(client_app) if client_app_name.include? "g5-cls-"
+      setup_client_hub(client_app) if client_app.name.include? "g5-ch"
+      setup_client_service(client_app) if client_app.name.include? "g5-cls-"
 
-      puts "Done deploying #{client_app.name}"
+      Rails.logger.info "Done deploying #{client_app.name}"
     end
   end
 
   def self.setup_client_service(client_app)
-    puts "Scaling worker to 1..."
+    Rails.logger.info "Scaling worker to 1..."
     client_app.heroku_post_ps_scale("worker", 1)
   end
 
   def self.setup_client_hub(client_app)
-    puts "Setting config variables..."
+    Rails.logger.info "Setting config variables..."
     client_app.heroku_config_set(
       # for targeting
       "UID" => client_app.uid,
@@ -46,11 +46,11 @@ class ClientAppDeployer
     )
 
     if client_app.name.include? "g5-ch-"
-      puts "Seeding database..."
+      Rails.logger.info "Seeding database..."
       client_app.heroku_run("rake seed_client")
       client_app.heroku_run("rake sibling:consume")
     elsif client_app.name.include? "g5-chd-"
-      puts "Seeding database..."
+      Rails.logger.info "Seeding database..."
       client_app.heroku_run("rake sibling:consume")
     end
   end
