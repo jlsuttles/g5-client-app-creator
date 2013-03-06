@@ -52,6 +52,8 @@ class ClientAppDeployer
     elsif client_app.name.include? "g5-chd-"
       Rails.logger.info "Seeding database..."
       client_app.heroku_run("rake sibling:consume")
+      Rails.logger.info "Setting app display name..."
+      client_app.heroku_config_set("APP_DISPLAY_NAME" => "Client Hub Deployer")
     end
   end
 end
