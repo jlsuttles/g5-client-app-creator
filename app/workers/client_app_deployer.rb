@@ -26,8 +26,9 @@ class ClientAppDeployer
   def self.setup_client_service(client_app)
     Rails.logger.info "Setting config variables..."
     client_app.heroku_config_set("HEROKU_APP_NAME" => client_app.name)
-    Rails.logger.info "Scaling worker to 1..."
-    client_app.heroku_post_ps_scale("worker", 1)
+    # THIS IS EXPENSIVE!
+    # Rails.logger.info "Scaling worker to 1..."
+    # client_app.heroku_post_ps_scale("worker", 1)
   end
 
   def self.setup_client_hub(client_app)
