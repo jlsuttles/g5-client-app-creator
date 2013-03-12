@@ -36,6 +36,10 @@ class ClientApp < ActiveRecord::Base
     GithubHerokuDeployer.heroku_addon_add(addon, deployer_options)
   end
 
+  def heroku_post_ps_scale(process, quantity)
+    GithubHerokuDeployer.heroku_post_ps_scale(process, quantity, deployer_options)
+  end
+
   def deployer_options
     { github_repo: git_repo,
       heroku_app_name: name,
