@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Entry do
   before do
+    Resque.stub(:enqueue)
     Entry.stub(:feed_url).and_return("spec/support/g5-configurator-entries.html")
     Entry.stub(:target_uid).and_return("http://g5-configurator.dev/apps/g5-client-app-creator")
   end

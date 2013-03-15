@@ -4,6 +4,9 @@ describe ClientApp do
   let(:entry) { Entry.create(uid: "http://example.com/1") }
   let(:client_app) { ClientApp.create(name: "mock-app", entry_id: entry.id, git_repo: "git@git") }
   let(:buddy_app) { ClientApp.create(name: "ch-mock-app", entry_id: entry.id, git_repo: "git@git") }
+  before do
+    Resque.stub(:enqueue)
+  end
 
   describe "#deploy" do
     it "deploys with options" do

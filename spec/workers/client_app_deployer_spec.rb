@@ -3,6 +3,7 @@ require "spec_helper"
 describe ClientAppDeployer do
   let(:client_app) { ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git") }
   before :each do
+    Resque.stub(:enqueue)
     ClientApp.any_instance.stub(:deploy).and_return(true)
     ClientApp.any_instance.stub(:heroku_run)
     ClientApp.any_instance.stub(:heroku_config_set)

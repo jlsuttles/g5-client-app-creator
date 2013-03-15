@@ -4,6 +4,7 @@ describe WebhooksController do
   describe "#g5_configurator" do
 
     before do
+      Resque.stub(:enqueue)
       Entry.stub(:async_consume_feed).and_return(true)
     end
 
