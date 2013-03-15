@@ -39,14 +39,7 @@ Defaults are set in `config/initializers/env.rb`.
 1. Set environment variable `HEROKU_API_KEY` to your Heroku API key.
 1. Set environment variable `ID_RSA` to your private ssh key you generated.
 1. Install [redis](http://redis.io/) and start it.
-1. Use foreman to start the web and worker proccesses
-```bash
-$ foreman start
-```
-Or if you are using pow or something start the job queue
-```bash
-$ rake jobs:work
-```
+1. Start a worker `rake jobs:work`
 
 
 ## Authors
