@@ -3,8 +3,8 @@ class EntryConsumer
   @queue = :consumer
 
   def self.perform
-    puts "Start consuming feed"
+    Rails.logger.info "Start consuming feed"
     Entry.consume_feed
-    puts "Done consuming feed"
+    Rails.logger.info "Done consuming feed"
   end
 end
