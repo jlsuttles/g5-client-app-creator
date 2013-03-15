@@ -22,17 +22,17 @@ automatically uses sensible defaults for the primary ActiveRecord database.
 $ rake db:setup
 ```
 
-## Optional: Set Custom G5 Configurator Feed URL
+### Optional: Set Custom G5 Configurator Feed URL
 
 1. Set environment variable `G5_CONFIGURATOR_FEED_URL`.
 Defaults are set in `config/initializers/env.rb`.
 
-## Optional: Set Custom G5 Client App Creator UID
+### Optional: Set Custom G5 Client App Creator UID
 
 1. Set environment variable `G5_CLIENT_APP_CREATOR_UID`.
 Defaults are set in `config/initializers/env.rb`.
 
-## Optional: Deploy Client Apps
+### Optional: Deploy Client Apps
 
 1. [Create a new ssh key and add it to Github.](https://help.github.com/articles/generating-ssh-keys)
 1. [Also add your ssh key to Heroku.](https://devcenter.heroku.com/articles/keys)
