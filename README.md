@@ -12,54 +12,51 @@ Provisions and deploys Apps automagically from Instruction Feed.
 
 1. Install all the required gems
 ```bash
-bundle
+$ bundle
 ```
 
 1. Set up your database.
 [rails-default-database](https://github.com/tpope/rails-default-database)
 automatically uses sensible defaults for the primary ActiveRecord database.
 ```bash
-rake db:setup
+$ rake db:setup
 ```
 
-1. Install [redis](http://redis.io/) and start it
-```bash
-brew install redis
-redis-server > ~/redis.log &
-```
+## Optional: Set Custom G5 Configurator Feed URL
 
-1. Create a new private key and add it to Github and Heroku
-    * [https://help.github.com/articles/generating-ssh-keys](https://help.github.com/articles/generating-ssh-keys)
-    * [https://devcenter.heroku.com/articles/keys](https://devcenter.heroku.com/articles/keys)
+1. Set environment variable `G5_CONFIGURATOR_FEED_URL`.
+Defaults are set in `config/initializers/env.rb`.
 
+## Optional: Set Custom G5 Client App Creator UID
 
-1. Export environment variables
-```bash
-export G5_CONFIGURATOR_FEED_URL=http://g5-configurator.herokuapp.com/
-export G5_CLIENT_APP_CREATOR_UID=http://g5-configurator.herokuapp.com/apps/g5-client-app-creator
-export HEROKU_USERNAME=your_username
-export HEROKU_API_KEY=your_api_key
-export ID_RSA=your_private_key
-```
+1. Set environment variable `G5_CLIENT_APP_CREATOR_UID`.
+Defaults are set in `config/initializers/env.rb`.
 
+## Optional: Deploy Client Apps
+
+1. [Create a new ssh key and add it to Github.](https://help.github.com/articles/generating-ssh-keys)
+1. [Also add your ssh key to Heroku.](https://devcenter.heroku.com/articles/keys)
+1. Set environment variable `HEROKU_API_KEY` to your Heroku API key.
+1. Set environment variable `ID_RSA` to your private ssh key you generated.
+1. Install [redis](http://redis.io/) and start it.
 1. Use foreman to start the web and worker proccesses
 ```bash
-foreman start
+$ foreman start
 ```
 Or if you are using pow or something start the job queue
 ```bash
-rake jobs:work
+$ rake jobs:work
 ```
+
 
 ## Authors
 
-  * Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
-  * Bookis Smuin / [@bookis](https://github.com/bookis)
+* Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
+* Bookis Smuin / [@bookis](https://github.com/bookis)
 
 
 ## Contributing
 
-1. Fork it
 1. Get it running
 1. Create your feature branch (`git checkout -b my-new-feature`)
 1. Write your code and **specs**
@@ -73,14 +70,18 @@ If you find bugs, have feature requests or questions, please
 
 ## Specs
 
+Run once.
 ```bash
-guard
+$ rspec spec
 ```
 
-
-## Coverage
-
+Keep then running.
 ```bash
-rspec spec
-open coverage/index.html
+$ guard
+```
+
+Coverage.
+```bash
+$ rspec spec
+$ open coverage/index.html
 ```
