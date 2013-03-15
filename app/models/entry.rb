@@ -1,65 +1,56 @@
 class Entry < ActiveRecord::Base
-  FEED_URL = "http://g5-configurator.herokuapp.com/instructions"
-  TARGET_URL = "http://g5-configurator.herokuapp.com/apps/1"
-
   attr_accessible :name, :uid
-
   has_many :client_apps
-
+  accepts_nested_attributes_for :client_apps
   validates :uid, uniqueness: true
 
   class << self
-    def feed(path_or_url=FEED_URL)
-      G5HentryConsumer.parse(path_or_url, last_modified_at: last_modified_at)
+    def feed_url
+      ENV["G5_CONFIGURATOR_FEED_URL"]
+    end
+
+    def target_uid
+      ENV["G5_CLIENT_APP_CREATOR_UID"]
+    end
+
+    def feed
+      Microformats2.parse(feed_url)
+    end
+
+    def consume_feed
+      feed.entries.map do |hentry|
+        find_or_create_from_hentry(hentry) if targets_me?(hentry)
+      end.compact
+    rescue OpenURI::HTTPError, "304 Not Modified"
     end
 
     def async_consume_feed
       Resque.enqueue(EntryConsumer)
     end
-    
-    def last_modified_at
-      scoped.maximum(:created_at)
-    end
-
-    def consume_feed(path_or_url=FEED_URL)
-      feed(path_or_url).entries.map do |hentry|
-        consume_entry(hentry)
-      end.compact
-    rescue OpenURI::HTTPError, "304 Not Modified"
-      true
-    end
 
     def targets_me?(hentry)
-      if hentry.nil? || hentry.is_a?(String)
-        hentry == TARGET_URL
-      else
-        targets = hentry.content.first.targets
-        targets && targets.include?(TARGET_URL)
-      end
+      targets = instruction(hentry).g5_targets.map { |t| t.format.uid.to_s }
+      targets && targets.include?(target_uid)
     end
 
-    def consume_entry(hentry)
-      if targets_me?(hentry)
-        entry = find_or_initialize_from_hentry(hentry)
-        entry.build_client_apps_from_hentry(hentry)
-        entry.save
-        entry
-      end
+    def instruction(hentry)
+      Microformats2.parse(hentry.content.to_s).card
     end
 
-    def find_or_initialize_from_hentry(hentry)
-      find_or_initialize_by_uid(hentry.bookmark)
+    def find_or_create_from_hentry(hentry)
+      find_or_create_by_uid(hentry.uid.to_s) do |entry|
+        app = instruction(hentry).g5_app.format
+        if client_app = ClientApp.find_by_uid(app.uid.to_s)
+          entry.client_id = client_app.id
+        elsif app.org.present?
+          entry.client_apps_attributes = [
+            { uid: app.uid.to_s,
+              client_uid: app.org.format.uid.to_s,
+              name: app.name.to_s,
+              git_repo: app.g5_git_repo.to_s }
+          ]
+        end
+      end
     end
   end # class << self
-
-  def build_client_apps_from_hentry(hentry)
-    hentry.content.first.apps.each do |app|
-      client_apps.build(
-        uid: app.uid, 
-        client_uid: app.client_uid.try(:first),
-        name: app.name.try(:first), 
-        git_repo: app.git_repo.try(:first)
-      )
-    end
-  end
 end
