@@ -17,6 +17,5 @@
 /public/system
 /public/uploads
 .rvmrc
-.rspec
 .DS_Store
 /coverage
