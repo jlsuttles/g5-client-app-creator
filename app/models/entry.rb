@@ -42,7 +42,7 @@ class Entry < ActiveRecord::Base
         app = instruction(hentry).g5_app.format
         if client_app = ClientApp.find_by_uid(app.uid.to_s)
           entry.client_id = client_app.id
-        elsif app.org.present?
+        elsif app.respond_to?(:org)
           entry.client_apps_attributes = [
             { uid: app.uid.to_s,
               client_uid: app.org.format.uid.to_s,
