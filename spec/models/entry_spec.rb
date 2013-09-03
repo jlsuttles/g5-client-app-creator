@@ -61,8 +61,8 @@ describe Entry do
       before do
         @app = @instruction.g5_app.format
       end
-      it "has a name" do
-        @app.name.to_s.should == "g5-chd-metro-self-storage"
+      it "has a heroku app name" do
+        @app.g5_heroku_app_name.to_s.should == "g5-chd-metro-self-stor"
       end
       it "has an app uid" do
         @app.uid.to_s.should == "http://g5-configurator.dev/apps/g5-chd-metro-self-storage"

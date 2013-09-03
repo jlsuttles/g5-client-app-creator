@@ -46,7 +46,7 @@ class Entry < ActiveRecord::Base
           entry.client_apps_attributes = [
             { uid: app.uid.to_s,
               client_uid: app.org.format.uid.to_s,
-              name: app.name.to_s,
+              name: app.g5_heroku_app_name.to_s,
               git_repo: app.g5_git_repo.to_s }
           ]
         end
