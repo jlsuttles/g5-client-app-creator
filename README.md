@@ -37,6 +37,7 @@ Defaults are set in `config/initializers/env.rb`.
 1. [Create a new ssh key and add it to Github.](https://help.github.com/articles/generating-ssh-keys)
 1. [Also add your ssh key to Heroku.](https://devcenter.heroku.com/articles/keys)
 1. Set environment variable `HEROKU_API_KEY` to your Heroku API key.
+1. Set environment variable `HEROKU_USERNAME` to your Heroku user name.
 1. Set environment variable `ID_RSA` to your private ssh key you generated.
 1. Install [redis](http://redis.io/) and start it.
 1. Start a worker `rake jobs:work`
