@@ -1,6 +1,7 @@
 class ClientAppDeployer
   extend HerokuResqueAutoscaler if Rails.env.production?
   @queue = :deployer
+  attr_reader :app, :defaults, :retries
 
   def self.perform(client_app_id)
     self.new(client_app_id).perform
@@ -9,6 +10,7 @@ class ClientAppDeployer
   def initialize(client_app_id)
     @app = ClientApp.find(client_app_id)
     @defaults = DEFAULTS["deploys"]["initial"][@app.app_type]
+    @retries = 0
   end
 
   def perform
@@ -17,6 +19,15 @@ class ClientAppDeployer
     add_addons
     run_tasks
     Rails.logger.info "Finished deploying #{@app.name}!"
+  rescue GithubHerokuDeployer::CommandException,
+         Heroku::API::Errors::ErrorWithResponse => e
+    if should_retry?
+      Rails.logger.info "Retrying  #{@app.name}..."
+      increment_retries
+      retry
+    else
+      raise e
+    end
   end
 
   def create
@@ -48,4 +59,13 @@ class ClientAppDeployer
       @app.heroku_run(task)
     end
   end
+
+  def should_retry?
+    @retries < 3
+  end
+
+  def increment_retries
+    @retries += 1
+  end
+
 end

@@ -1,16 +1,20 @@
 require "spec_helper"
 
 describe ClientAppDeployer do
-  let(:client_app) { ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git") }
   before :each do
     Resque.stub(:enqueue)
-    ClientApp.any_instance.stub(:deploy).and_return(true)
-    ClientApp.any_instance.stub(:heroku_run)
-    ClientApp.any_instance.stub(:heroku_config_set)
-    ClientApp.any_instance.stub(:heroku_addon_add)
   end
 
   describe "#perform" do
+    let(:client_app) { ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git") }
+
+    before :each do
+      ClientApp.any_instance.stub(:deploy).and_return(true)
+      ClientApp.any_instance.stub(:heroku_run)
+      ClientApp.any_instance.stub(:heroku_config_set)
+      ClientApp.any_instance.stub(:heroku_addon_add)
+    end
+
     it "deploys" do
       ClientApp.any_instance.should_receive(:deploy).once
       ClientAppDeployer.perform(client_app.id)
@@ -39,6 +43,31 @@ describe ClientAppDeployer do
       client_app.update_attribute(:name, "g5-chd-mock-app")
       ClientApp.any_instance.should_receive(:heroku_run).with("rake sibling:consume").once
       ClientAppDeployer.perform(client_app.id)
+    end
+  end
+
+  describe "when an exception is raised" do
+    before do
+     client_app = ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git")
+     @client_app_deployer = ClientAppDeployer.new(client_app.id)
+    end
+
+    it "retries 0 times when Exception" do
+      @client_app_deployer.stub(:create).and_raise(Exception)
+      expect { @client_app_deployer.perform }.to raise_error(Exception)
+      expect(@client_app_deployer.retries).to eq 0
+    end
+
+    it "retries 3 times when GithubHerokuDeployer::CommandException" do
+      @client_app_deployer.stub(:create).and_raise(GithubHerokuDeployer::CommandException)
+      expect { @client_app_deployer.perform }.to raise_error(GithubHerokuDeployer::CommandException)
+      expect(@client_app_deployer.retries).to eq 3
+    end
+
+    it "retries 3 times when Heroku::API::Errors::ErrorWithResponse" do
+      @client_app_deployer.stub(:create).and_raise(Heroku::API::Errors::ErrorWithResponse.new(nil, nil))
+      expect { @client_app_deployer.perform }.to raise_error(Heroku::API::Errors::ErrorWithResponse)
+      expect(@client_app_deployer.retries).to eq 3
     end
   end
 end
