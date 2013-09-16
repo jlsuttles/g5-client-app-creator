@@ -1,0 +1,33 @@
+deploys:
+  initial:
+    ch:
+      config:
+        - "UID"
+        - "MAIN_APP_UID"
+        - "G5_CLIENT_UID"
+        - "HEROKU_APP_NAME"
+        - "HEROKU_API_KEY"
+        - "HEROKU_USERNAME"
+        - "ID_RSA"
+        - "G5_CONFIGURATOR_FEED_URL"
+      tasks:
+        - "rake db:migrate"
+        - "rake deploy:tasks"
+      addons:
+        - "redistogo:nano"
+    chd:
+      config:
+        - "UID"
+        - "MAIN_APP_UID"
+        - "G5_CLIENT_UID"
+        - "HEROKU_APP_NAME"
+        - "HEROKU_API_KEY"
+        - "HEROKU_USERNAME"
+        - "ID_RSA"
+        - "G5_CONFIGURATOR_FEED_URL"
+        - "APP_DISPLAY_NAME"
+      tasks:
+        - "rake db:migrate"
+        - "rake deploy:tasks"
+      addons:
+        - "redistogo:nano"

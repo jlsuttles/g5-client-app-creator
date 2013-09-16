@@ -57,4 +57,42 @@ class ClientApp < ActiveRecord::Base
   def siblings
     entry.client_apps.drop_while { |k| k == self }
   end
+
+  def app_type
+    name.split("-")[1]
+  end
+
+  # used to set up heroku config
+
+  def app_display_name
+    "Client Hub Deployer"
+  end
+
+  def main_app_uid
+    uid
+  end
+
+  def g5_client_uid
+    client_uid
+  end
+
+  def heroku_app_name
+    name
+  end
+
+  def heroku_api_key
+    ENV["HEROKU_API_KEY"]
+  end
+
+  def heroku_username
+    ENV["HEROKU_USERNAME"]
+  end
+
+  def id_rsa
+    ENV["ID_RSA"]
+  end
+
+  def g5_configurator_feed_url
+    ENV["G5_CONFIGURATOR_FEED_URL"]
+  end
 end
