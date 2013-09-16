@@ -9,3 +9,5 @@ ENV["G5_CLIENT_APP_CREATOR_UID"] ||= case Rails.env
   when "development" then "http://g5-configurator.dev/apps/g5-client-app-creator"
   when "test" then "http://g5-configurator.test/apps/g5-client-app-creator"
 end
+
+ENV["APP_NAMESPACE"] ||= "g5"

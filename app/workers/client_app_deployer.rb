@@ -16,8 +16,8 @@ class ClientAppDeployer
       client_app.heroku_addon_add("redistogo:nano")
       sleep 15 unless Rails.env.test?
 
-      setup_client_hub(client_app) if client_app.name.include? "g5-ch"
-      setup_client_service(client_app) if client_app.name.include? "g5-cls-"
+      setup_client_hub(client_app) if app_of_type?(client_app, "ch")
+      setup_client_service(client_app) if app_of_type?(client_app, "cls")
 
       Rails.logger.info "Done deploying #{client_app.name}"
     end
@@ -48,15 +48,19 @@ class ClientAppDeployer
       "ID_RSA" => ENV["ID_RSA"],
     )
 
-    if client_app.name.include? "g5-ch-"
+    if app_of_type?(client_app, "ch")
       Rails.logger.info "Seeding database..."
       client_app.heroku_run("rake seed_client")
       client_app.heroku_run("rake sibling:consume")
-    elsif client_app.name.include? "g5-chd-"
+    elsif app_of_type?(client_app, "chd")
       Rails.logger.info "Seeding database..."
       client_app.heroku_run("rake sibling:consume")
       Rails.logger.info "Setting app display name..."
       client_app.heroku_config_set("APP_DISPLAY_NAME" => "Client Hub Deployer")
     end
+  end
+
+  def self.app_of_type?(client_app, type)
+    client_app.name.starts_with?(ENV["APP_NAMESPACE"] + "-" + type)
   end
 end
