@@ -31,17 +31,13 @@ describe ClientAppDeployer do
       ClientApp.any_instance.should_receive(:heroku_addon_add).with("redistogo:nano").once
       ClientAppDeployer.perform(client_app.id)
     end
-    it "runs rake seed_client if deploying client hub" do
-      ClientApp.any_instance.should_receive(:heroku_run).with("rake seed_client").once
+    it "runs rake deploy:tasks if deploying client-hub" do
+      ClientApp.any_instance.should_receive(:heroku_run).with("rake deploy:tasks").once
       ClientAppDeployer.perform(client_app.id)
     end
-    it "runs rake sibling:consume" do
-      ClientApp.any_instance.should_receive(:heroku_run).with("rake sibling:consume").once
-      ClientAppDeployer.perform(client_app.id)
-    end
-    it "runs rake sibling:consume" do
+    it "runs rake deploy:tasks if deploying client-hub-deployer" do
       client_app.update_attribute(:name, "g5-chd-mock-app")
-      ClientApp.any_instance.should_receive(:heroku_run).with("rake sibling:consume").once
+      ClientApp.any_instance.should_receive(:heroku_run).with("rake deploy:tasks").once
       ClientAppDeployer.perform(client_app.id)
     end
   end
