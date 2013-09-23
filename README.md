@@ -1,11 +1,8 @@
 # G5 Client App Creator
 
-Provisions and deploys Apps automagically from Instruction Feed.
-
-* Receives Webhook from Instruction Feed Publisher
-* Consumes Instruction Feed
-* Provisions Apps
-* Deploys Apps
+1. Receives webhook from g5-configurator
+1. Reads g5-configurator's instruction feed
+1. Provisions and deploys apps from instruction feed
 
 
 ## Setup
@@ -15,38 +12,32 @@ Provisions and deploys Apps automagically from Instruction Feed.
 $ bundle
 ```
 
-1. Set up your database.
-[rails-default-database](https://github.com/tpope/rails-default-database)
-automatically uses sensible defaults for the primary ActiveRecord database.
+1. Set up your database
 ```bash
 $ rake db:setup
 ```
+[rails-default-database](https://github.com/tpope/rails-default-database)
+automatically uses sensible defaults for the primary ActiveRecord database
 
-### Optional: Set Custom G5 Configurator Feed URL
+1. Customize setup by overriding default environment variables, which are set
+   in [config/initializers/env.rb](config/initializers/env.rb)
 
-1. Set environment variable `G5_CONFIGURATOR_FEED_URL`.
-Defaults are set in `config/initializers/env.rb`.
+1. Manually read the g5-configurator instruction feed
+```bash
+$ rake update_feed
+```
 
-### Optional: Set Custom G5 Client App Creator UID
 
-1. Set environment variable `G5_CLIENT_APP_CREATOR_UID`.
-Defaults are set in `config/initializers/env.rb`.
+## Deploy Apps to Heroku
 
-### Optional: Deploy Client Apps
-
-1. [Create a new ssh key and add it to Github.](https://help.github.com/articles/generating-ssh-keys)
-1. [Also add your ssh key to Heroku.](https://devcenter.heroku.com/articles/keys)
-1. Set environment variable `HEROKU_API_KEY` to your Heroku API key.
-1. Set environment variable `HEROKU_USERNAME` to your Heroku user name.
-1. Set environment variable `ID_RSA` to your private ssh key you generated.
-1. Install [redis](http://redis.io/) and start it.
-1. Start a worker `rake jobs:work`
-
-### Optional: Set the App Namespace
-Used to determine the top-level namespace for your infrastructure (e.g. the `g5` in `g5-ch-ab123-my-apartments`).  If you plan on building a parallel infrastructure with a separate prefix for its deployed applications, you should set this.
-
-1. Set environment variable `APP_NAMESPACE`.
-Defaults are set in `config/initializers/env.rb`.
+1. [Generate a new ssh key and add it to Github](https://help.github.com/articles/generating-ssh-keys)
+1. [Add the same ssh key to Heroku](https://devcenter.heroku.com/articles/keys)
+1. Set environment variables
+    - `HEROKU_API_KEY`
+    - `HEROKU_USERNAME`
+    - `ID_RSA` the ssh key you just generated
+1. Start [redis](http://redis.io/)
+1. Start a resque worker with `rake jobs:work`
 
 
 ## Authors
@@ -54,6 +45,8 @@ Defaults are set in `config/initializers/env.rb`.
 * Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
 * Bookis Smuin / [@bookis](https://github.com/bookis)
 * Michael Mitchell / [@variousred](https://github.com/variousred)
+* Chris Stringer / [@jcstringer](https://github.com/jcstringer)
+* Don Petersen / [@dpetersen](https://github.com/dpetersen)
 
 
 ## Contributing
