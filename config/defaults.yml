@@ -15,6 +15,7 @@ deploys:
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
+        - "papertrail:choklad"
     chd:
       config:
         - "UID"
@@ -31,3 +32,4 @@ deploys:
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
+        - "papertrail:choklad"
