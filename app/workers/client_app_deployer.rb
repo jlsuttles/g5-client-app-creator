@@ -14,6 +14,7 @@ class ClientAppDeployer
   end
 
   def perform
+    raise ArgumentError, "Unknown app type: #{@app.app_type}" unless @defaults
     create
     configure
     add_addons

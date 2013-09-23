@@ -66,4 +66,15 @@ describe ClientAppDeployer do
       expect(@client_app_deployer.retries).to eq 3
     end
   end
+
+  describe "when app type does not exist in deploy defaults" do
+    before do
+     client_app = ClientApp.create(name: "g5-foo-mock-app", git_repo: "git@git")
+     @client_app_deployer = ClientAppDeployer.new(client_app.id)
+    end
+
+    it "raises an Exception" do
+      expect { @client_app_deployer.perform }.to raise_error(ArgumentError, "Unknown app type: foo")
+    end
+  end
 end
