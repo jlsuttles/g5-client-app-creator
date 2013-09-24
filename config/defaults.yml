@@ -16,6 +16,7 @@ deploys:
       addons:
         - "redistogo:nano"
         - "papertrail:choklad"
+        - "memcachier:dev"
     chd:
       config:
         - "UID"
