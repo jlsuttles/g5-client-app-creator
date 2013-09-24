@@ -49,19 +49,19 @@ describe ClientAppDeployer do
     end
 
     it "retries 0 times when Exception" do
-      @client_app_deployer.stub(:create).and_raise(Exception)
+      ClientApp.any_instance.stub(:deploy).and_raise(Exception)
       expect { @client_app_deployer.perform }.to raise_error(Exception)
       expect(@client_app_deployer.retries).to eq 0
     end
 
     it "retries 3 times when GithubHerokuDeployer::CommandException" do
-      @client_app_deployer.stub(:create).and_raise(GithubHerokuDeployer::CommandException)
+      ClientApp.any_instance.stub(:deploy).and_raise(GithubHerokuDeployer::CommandException)
       expect { @client_app_deployer.perform }.to raise_error(GithubHerokuDeployer::CommandException)
       expect(@client_app_deployer.retries).to eq 3
     end
 
     it "retries 3 times when Heroku::API::Errors::ErrorWithResponse" do
-      @client_app_deployer.stub(:create).and_raise(Heroku::API::Errors::ErrorWithResponse.new(nil, nil))
+      ClientApp.any_instance.stub(:deploy).and_raise(Heroku::API::Errors::ErrorWithResponse.new(nil, nil))
       expect { @client_app_deployer.perform }.to raise_error(Heroku::API::Errors::ErrorWithResponse)
       expect(@client_app_deployer.retries).to eq 3
     end

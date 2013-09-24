@@ -20,6 +20,11 @@ class ClientAppDeployer
     add_addons
     run_tasks
     Rails.logger.info "Finished deploying #{@app.name}!"
+  end
+
+  def create
+    Rails.logger.info "Creating #{@app.name}..."
+    @app.deploy
   rescue GithubHerokuDeployer::CommandException,
          Heroku::API::Errors::ErrorWithResponse => e
     if should_retry?
@@ -31,11 +36,6 @@ class ClientAppDeployer
     end
   end
 
-  def create
-    Rails.logger.info "Creating #{@app.name}..."
-    @app.deploy
-  end
-
   def configure
     Rails.logger.info "Configuring #{@app.name}..."
     config = {}
@@ -45,19 +45,29 @@ class ClientAppDeployer
       end
     end
     @app.heroku_config_set(config)
+  rescue Heroku::API::Errors::RequestFailed => e
+    Rails.logger.warn "Failure: Configuring #{@app.name}"
   end
 
   def add_addons
     Rails.logger.info "Adding addons to #{@app.name}..."
     @defaults["addons"].each do |addon|
-      @app.heroku_addon_add(addon)
+      begin
+        @app.heroku_addon_add(addon)
+      rescue Heroku::API::Errors::RequestFailed => e
+        Rails.logger.warn "Failure: Addon '#{addon}' failed to be added to #{@app.name}"
+      end
     end
   end
 
   def run_tasks
     Rails.logger.info "Running tasks on #{@app.name}..."
     @defaults["tasks"].each do |task|
-      @app.heroku_run(task)
+      begin
+        @app.heroku_run(task)
+      rescue Heroku::API::Errors::RequestFailed => e
+        Rails.logger.warn "Failure: Running task '#{task}' on #{@app.name}"
+      end
     end
   end
 
@@ -68,5 +78,4 @@ class ClientAppDeployer
   def increment_retries
     @retries += 1
   end
-
 end
