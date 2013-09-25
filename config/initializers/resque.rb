@@ -1,12 +1,29 @@
 # Setup for Heroku
 Resque.redis = ENV["REDISTOGO_URL"] if ENV["REDISTOGO_URL"]
+Resque.redis ||= ENV["REDISCLOUD_URL"] if ENV["REDISCLOUD_URL"]
 
-# Establish connection to the database before each job
-Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection }
+# Setup for Heroku
+#
+# Resque uses forking to create new worker processes. The main process
+# connection should be disconnected before forking (to avoid consuming
+# unnecessary resources) while worker connections should be established after
+# the fork occurs.
+#
+# https://devcenter.heroku.com/articles/forked-pg-connections#resque-ruby-queuing
+
+Resque.before_fork do
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end
+
+Resque.after_fork do
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
 
 # Require HTTP Basic Auth to view dashboard
-if ENV["NERD_HTTP_USER"] && ENV["NERD_HTTP_PASSWORD"]
+if ENV["RESQUE_HTTP_USER"] && ENV["RESQUE_HTTP_PASSWORD"]
   Resque::Server.use(Rack::Auth::Basic) do |user, password|
-    user == ENV["NERD_HTTP_USER"] and password == ENV["NERD_HTTP_PASSWORD"]
+    user == ENV["RESQUE_HTTP_USER"] and password == ENV["RESQUE_HTTP_PASSWORD"]
   end
 end
