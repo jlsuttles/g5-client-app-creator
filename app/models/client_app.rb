@@ -64,6 +64,10 @@ class ClientApp < ActiveRecord::Base
 
   # used to set up heroku config
 
+  def secret_token
+    SecureRandom.hex(30)
+  end
+
   def app_display_name
     "Client Hub Deployer"
   end
