@@ -2,6 +2,7 @@ deploys:
   initial:
     ch:
       config:
+        - "SECRET_TOKEN"
         - "UID"
         - "MAIN_APP_UID"
         - "G5_CLIENT_UID"
@@ -20,6 +21,7 @@ deploys:
         - "memcachier:dev"
     chd:
       config:
+        - "SECRET_TOKEN"
         - "UID"
         - "MAIN_APP_UID"
         - "G5_CLIENT_UID"
