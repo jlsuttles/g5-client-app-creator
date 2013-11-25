@@ -40,15 +40,7 @@ deploys:
         - "papertrail:choklad"
     cpns:
       config:
-        - "SECRET_TOKEN"
-        - "UID"
-        - "MAIN_APP_UID"
-        - "G5_CLIENT_UID"
-        - "HEROKU_APP_NAME"
-        - "HEROKU_API_KEY"
-        - "HEROKU_USERNAME"
-        - "ID_RSA"
-        - "G5_CONFIGURATOR_FEED_URL"
+        - "SECRET_KEY_BASE"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"
