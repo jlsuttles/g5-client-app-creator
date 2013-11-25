@@ -68,6 +68,10 @@ class ClientApp < ActiveRecord::Base
     SecureRandom.hex(30)
   end
 
+  def secret_key_base
+    secret_token
+  end
+
   def app_display_name
     "Client Hub Deployer"
   end

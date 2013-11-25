@@ -38,3 +38,10 @@ deploys:
         - "redistogo:nano"
         - "rediscloud:20"
         - "papertrail:choklad"
+    cpns:
+      config:
+        - "SECRET_KEY_BASE"
+      tasks:
+        - "rake db:migrate"
+      addons:
+        - "papertrail:choklad"
