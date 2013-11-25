@@ -43,6 +43,5 @@ deploys:
         - "SECRET_KEY_BASE"
       tasks:
         - "rake db:migrate"
-        - "rake deploy:tasks"
       addons:
         - "papertrail:choklad"
