@@ -16,7 +16,7 @@ deploys:
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
-        - "rediscloud:20"
+        - "rediscloud"
         - "papertrail:choklad"
         - "memcachier:dev"
     chd:
@@ -36,7 +36,7 @@ deploys:
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
-        - "rediscloud:20"
+        - "rediscloud"
         - "papertrail:choklad"
     cpns:
       config:
