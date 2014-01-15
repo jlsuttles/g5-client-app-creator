@@ -19,6 +19,7 @@ deploys:
         - "rediscloud"
         - "papertrail:choklad"
         - "memcachier:dev"
+        - "pgbackups:auto-month"
     chd:
       config:
         - "SECRET_TOKEN"
@@ -38,6 +39,7 @@ deploys:
         - "redistogo:nano"
         - "rediscloud"
         - "papertrail:choklad"
+        - "pgbackups:auto-month"
     cpns:
       config:
         - "SECRET_KEY_BASE"
@@ -45,6 +47,7 @@ deploys:
         - "rake db:migrate"
       addons:
         - "papertrail:choklad"
+        - "pgbackups:auto-month"
     cpas:
       config:
         - "SECRET_KEY_BASE"
@@ -52,3 +55,4 @@ deploys:
         - "rake db:migrate"
       addons:
         - "papertrail:choklad"
+        - "pgbackups:auto-month"
