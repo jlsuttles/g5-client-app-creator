@@ -103,6 +103,7 @@ GEM
       nokogiri (~> 1.5.6)
     mime-types (1.25)
     multi_json (1.8.0)
+    newrelic_rpm (3.7.1.182)
     nokogiri (1.5.10)
     pg (0.14.1)
     polyglot (0.3.3)
@@ -221,6 +222,7 @@ DEPENDENCIES
   heroku_resque_autoscaler (~> 0.1.0)
   jquery-rails
   microformats2 (= 2.0.0.pre4)
+  newrelic_rpm
   pg
   quiet_assets (~> 1.0.1)
   rails (~> 3.2.14)
