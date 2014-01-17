@@ -11,6 +11,7 @@ deploys:
         - "HEROKU_USERNAME"
         - "ID_RSA"
         - "G5_CONFIGURATOR_FEED_URL"
+        - "NEW_RELIC_APP_NAME"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"
@@ -20,6 +21,7 @@ deploys:
         - "papertrail:choklad"
         - "memcachier:dev"
         - "pgbackups:auto-month"
+        - "newrelic:stark"
     chd:
       config:
         - "SECRET_TOKEN"
@@ -32,6 +34,7 @@ deploys:
         - "ID_RSA"
         - "G5_CONFIGURATOR_FEED_URL"
         - "APP_DISPLAY_NAME"
+        - "NEW_RELIC_APP_NAME"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"
@@ -40,14 +43,17 @@ deploys:
         - "rediscloud"
         - "papertrail:choklad"
         - "pgbackups:auto-month"
+        - "newrelic:stark"
     cpns:
       config:
         - "SECRET_KEY_BASE"
+        - "NEW_RELIC_APP_NAME"
       tasks:
         - "rake db:migrate"
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
+        - "newrelic:stark"
     cpas:
       config:
         - "SECRET_KEY_BASE"
@@ -56,3 +62,4 @@ deploys:
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
+        - "newrelic:stark"
