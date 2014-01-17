@@ -88,6 +88,10 @@ class ClientApp < ActiveRecord::Base
     name
   end
 
+  def new_relic_app_name
+    name
+  end
+
   def heroku_api_key
     ENV["HEROKU_API_KEY"]
   end
