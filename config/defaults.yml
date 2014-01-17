@@ -57,6 +57,7 @@ deploys:
     cpas:
       config:
         - "SECRET_KEY_BASE"
+        - "NEW_RELIC_APP_NAME"
       tasks:
         - "rake db:migrate"
       addons:
