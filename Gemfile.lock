@@ -85,6 +85,8 @@ GEM
       heroku-api (~> 0.3.5)
       resque (~> 1.23.0)
     hike (1.2.3)
+    honeybadger (1.10.1)
+      json
     i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -220,6 +222,7 @@ DEPENDENCIES
   github_heroku_deployer (~> 0.2.1)
   guard-rspec (~> 2.1.0)
   heroku_resque_autoscaler (~> 0.1.0)
+  honeybadger
   jquery-rails
   microformats2 (= 2.0.0.pre4)
   newrelic_rpm
