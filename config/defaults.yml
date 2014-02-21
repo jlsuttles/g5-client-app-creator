@@ -1,6 +1,6 @@
 deploys:
   initial:
-    ch:
+    cms:
       config:
         - "SECRET_TOKEN"
         - "UID"
