@@ -47,6 +47,7 @@ $ rake update_feed
 * Michael Mitchell / [@variousred](https://github.com/variousred)
 * Chris Stringer / [@jcstringer](https://github.com/jcstringer)
 * Don Petersen / [@dpetersen](https://github.com/dpetersen)
+* Jessica Dillon / [@jessicard](https://github.com/jessicard)
 
 
 ## Contributing
