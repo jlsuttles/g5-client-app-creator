@@ -13,7 +13,7 @@ ENV["G5_CLIENT_APP_CREATOR_UID"] ||= case Rails.env
 end
 
 # Used to determine the top-level namespace for your infrastructure,
-# e.g. the g5 in g5-ch-ab123-my-apartments
+# e.g. the g5 in g5-cms-ab123-my-apartments
 #
 # If you plan on building a parallel infrastructure with a separate prefix for
 # its deployed applications, you should set this.

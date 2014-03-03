@@ -6,7 +6,7 @@ describe ClientAppDeployer do
   end
 
   describe "#perform" do
-    let(:client_app) { ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git") }
+    let(:client_app) { ClientApp.create(name: "g5-cms-mock-app", git_repo: "git@git") }
 
     before :each do
       ClientApp.any_instance.stub(:deploy).and_return(true)
@@ -44,7 +44,7 @@ describe ClientAppDeployer do
 
   describe "when an exception is raised" do
     before do
-     client_app = ClientApp.create(name: "g5-ch-mock-app", git_repo: "git@git")
+     client_app = ClientApp.create(name: "g5-cms-mock-app", git_repo: "git@git")
      @client_app_deployer = ClientAppDeployer.new(client_app.id)
     end
 
