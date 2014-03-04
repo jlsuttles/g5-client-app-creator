@@ -71,7 +71,7 @@ describe Entry do
         @app.org.format.uid.to_s.should == "http://g5-hub.dev/clients/g5-c-1-metro-self-storage"
       end
       it "has a git repo" do
-        @app.g5_git_repo.to_s.should == "git@github.com:g5search/g5-client-hub-deployer.git"
+        @app.g5_git_repo.to_s.should == "git@github.com:g5search/g5-client-app-updater.git"
       end
     end
   end
