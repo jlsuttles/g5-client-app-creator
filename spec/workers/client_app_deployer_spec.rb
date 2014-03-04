@@ -36,7 +36,7 @@ describe ClientAppDeployer do
       ClientAppDeployer.perform(client_app.id)
     end
     it "runs rake deploy:tasks if deploying client-hub-deployer" do
-      client_app.update_attribute(:name, "g5-chd-mock-app")
+      client_app.update_attribute(:name, "g5-cau-mock-app")
       ClientApp.any_instance.should_receive(:heroku_run).with("rake deploy:tasks").once
       ClientAppDeployer.perform(client_app.id)
     end
