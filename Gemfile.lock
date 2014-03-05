@@ -94,6 +94,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.7.7)
     listen (0.7.3)
+    lograge (0.2.2)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     lumberjack (1.0.2)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -224,6 +228,7 @@ DEPENDENCIES
   heroku_resque_autoscaler (~> 0.1.0)
   honeybadger
   jquery-rails
+  lograge
   microformats2 (= 2.0.0.pre4)
   newrelic_rpm
   pg
