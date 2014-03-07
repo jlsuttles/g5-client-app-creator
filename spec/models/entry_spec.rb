@@ -62,16 +62,16 @@ describe Entry do
         @app = @instruction.g5_app.format
       end
       it "has a heroku app name" do
-        @app.g5_heroku_app_name.to_s.should == "g5-chd-metro-self-stor"
+        @app.g5_heroku_app_name.to_s.should == "g5-cau-metro-self-stor"
       end
       it "has an app uid" do
-        @app.uid.to_s.should == "http://g5-configurator.dev/apps/g5-chd-metro-self-storage"
+        @app.uid.to_s.should == "http://g5-configurator.dev/apps/g5-cau-metro-self-storage"
       end
       it "has a client uid" do
         @app.org.format.uid.to_s.should == "http://g5-hub.dev/clients/g5-c-1-metro-self-storage"
       end
       it "has a git repo" do
-        @app.g5_git_repo.to_s.should == "git@github.com:g5search/g5-client-hub-deployer.git"
+        @app.g5_git_repo.to_s.should == "git@github.com:g5search/g5-client-app-updater.git"
       end
     end
   end

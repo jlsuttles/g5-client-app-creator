@@ -22,7 +22,7 @@ deploys:
         - "memcachier:dev"
         - "pgbackups:auto-month"
         - "newrelic:stark"
-    chd:
+    cau:
       config:
         - "SECRET_TOKEN"
         - "UID"

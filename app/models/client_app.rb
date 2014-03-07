@@ -73,7 +73,7 @@ class ClientApp < ActiveRecord::Base
   end
 
   def app_display_name
-    "Client Hub Deployer"
+    "Client App Updater"
   end
 
   def main_app_uid
