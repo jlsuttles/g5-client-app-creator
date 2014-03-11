@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-source "https://gems.gemfury.com/***REMOVED***/"
 ruby "1.9.3"
 
 gem "rails", "~> 3.2.14"
