@@ -1,5 +1,8 @@
 # G5 Client App Creator
 
+[![Build Status](https://travis-ci.org/G5/g5-client-app-creator.png?branch=master)](https://travis-ci.org/G5/g5-client-app-creator)
+[![Code Climate](https://codeclimate.com/repos/531ea1bae30ba00f7800187c/badges/543568b0ebef2bbdeff7/gpa.png)](https://codeclimate.com/repos/531ea1bae30ba00f7800187c/feed)
+
 1. Receives webhook from g5-configurator
 1. Reads g5-configurator's instruction feed
 1. Provisions and deploys apps from instruction feed
@@ -60,7 +63,7 @@ $ rake update_feed
 1. Create new Pull Request
 
 If you find bugs, have feature requests or questions, please
-[file an issue](https://github.com/g5search/g5-client-app-creator/issues).
+[file an issue](https://github.com/G5/g5-client-app-creator/issues).
 
 
 ## Specs
