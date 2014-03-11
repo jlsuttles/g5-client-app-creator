@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 1.9.3
+script:
+  - RAILS_ENV=test bundle exec rake db:schema:load --trace
+  - bundle exec rspec
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database g5_client_app_creator_test;' -U postgres
+notifications:
+  campfire:
+    rooms:
+      secure: glXbwoXQzqNfcKGgXTBr7qPMYUPpyQDa6RmJ4NG1z+RwRZbqedw6+niENW1ZOHxTiBeA3QJKw8bRj/ElXC1phMm21wQOGatfpzLGqbKA0ZS8j5EIg/OIjfrMgvKGyCfVDk/EKy8m9IdfFZURtkaajlsIXBKzHzwXU4i3yX01Ae8=
+    template:
+      - '%{repository}#%{build_number} %{message} (%{branch} - %{commit} : %{author}) Change view : %{compare_url} Build details : %{build_url}'
+    on_success: change
+    on_failure: always
