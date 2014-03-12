@@ -19,7 +19,6 @@ gem "uglifier", ">= 1.0.3"
 
 group :development, :test do
   gem "dotenv-rails", "~> 0.10.0"
-  gem "rails-default-database", "~> 1.0.6"
   gem "sqlite3"
   gem "simplecov", "~> 0.8.2", require: false
   gem "rspec-rails", "~> 2.14.1"
