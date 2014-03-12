@@ -1,5 +1,4 @@
 class Entry < ActiveRecord::Base
-  attr_accessible :name, :uid
   has_many :client_apps
   accepts_nested_attributes_for :client_apps
   validates :uid, uniqueness: true

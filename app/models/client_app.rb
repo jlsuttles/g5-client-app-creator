@@ -1,5 +1,4 @@
 class ClientApp < ActiveRecord::Base
-  attr_accessible :uid, :client_uid, :name, :app_type, :entry_id, :sibling_app, :git_repo
 
   belongs_to :entry
 
