@@ -1,5 +1,5 @@
 class ClientAppsController < ApplicationController
   def index
-    @client_apps = ClientApp.order("updated_at DESC").to_a
+    @client_apps = ClientApp.order("updated_at DESC").all
   end
 end
