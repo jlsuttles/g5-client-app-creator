@@ -64,3 +64,36 @@ deploys:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
         - "newrelic:stark"
+    cls:
+      config:
+        - "HEROKU_APP_NAME"
+        - "HEROKU_API_KEY"
+        - "HONEYBADGER_API_KEY"
+        # SSO is going to have per-app credentials and needs to get sorted
+        # service-to-service credentials should be on this app first
+        # mail credentials should be on this app first
+        # ADMIN_EMAIL - is leads specific!
+        # CXM_HOSTNAME - need to programatically figure that out
+      tasks:
+        - "rake db:migrate"
+      addons:
+        - "pgbackups:auto-month"
+        - "newrelic:stark"
+        - "redistogo:nano"
+        # either use papertrail or use per-app drains to logentries
+    cxm:
+      config:
+        - "HEROKU_APP_NAME"
+        - "HEROKU_API_KEY"
+        - "HONEYBADGER_API_KEY"
+        # SSO is going to have per-app credentials and needs to get sorted
+        # service-to-service credentials should be on this app first
+        # CLS_HOSTNAME  - need to programatically figure that out
+        # CORE_* - needs to be on this app first.
+      tasks:
+        - "rake db:migrate"
+      addons:
+        - "pgbackups:auto-month"
+        - "newrelic:stark"
+        - "redistogo:nano"
+        # either use papertrail or use per-app drains to logentries

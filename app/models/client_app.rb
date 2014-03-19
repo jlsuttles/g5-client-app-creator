@@ -107,4 +107,8 @@ class ClientApp < ActiveRecord::Base
   def g5_configurator_feed_url
     ENV["G5_CONFIGURATOR_FEED_URL"]
   end
+
+  def honeybadger_api_key
+    ENV["HONEYBADGER_API_KEY"]
+  end
 end
