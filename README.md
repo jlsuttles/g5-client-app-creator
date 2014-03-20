@@ -14,13 +14,12 @@
 ```bash
 $ bundle
 ```
+1. Rename config/database.example.yml to config/database.yml.
 
 1. Set up your database
 ```bash
 $ rake db:setup
 ```
-[rails-default-database](https://github.com/tpope/rails-default-database)
-automatically uses sensible defaults for the primary ActiveRecord database
 
 1. Customize setup by overriding default environment variables, which are set
    in [config/initializers/env.rb](config/initializers/env.rb)
