@@ -1,5 +1,4 @@
 class Entry < ActiveRecord::Base
-  attr_accessible :name, :uid
   has_many :client_apps
   accepts_nested_attributes_for :client_apps
   validates :uid, uniqueness: true
@@ -38,7 +37,7 @@ class Entry < ActiveRecord::Base
     end
 
     def find_or_create_from_hentry(hentry)
-      find_or_create_by_uid(hentry.uid.to_s) do |entry|
+      find_or_create_by(uid: hentry.uid.to_s) do |entry|
         app = instruction(hentry).g5_app.format
         if client_app = ClientApp.find_by_uid(app.uid.to_s)
           entry.client_id = client_app.id
