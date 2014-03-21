@@ -37,4 +37,5 @@ group :production do
   gem "newrelic_rpm"
   gem "honeybadger"
   gem "lograge"
+  gem "rails_12factor"
 end
