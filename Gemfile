@@ -10,7 +10,7 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 gem "heroku_resque_autoscaler", "~> 0.1.0"
 gem "github_heroku_deployer", "~> 0.2.1"
 gem "microformats2", "2.0.1"
-gem "g5_sibling_deployer_engine", "~> 0.4.0"
+gem "g5_sibling_deployer_engine", "~> 0.4.1"
 
 gem "sass-rails", "~> 4.0.0"
 gem "coffee-rails", "~> 4.0.0"
