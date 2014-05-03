@@ -106,4 +106,16 @@ class ClientApp < ActiveRecord::Base
   def g5_configurator_feed_url
     ENV["G5_CONFIGURATOR_FEED_URL"]
   end
+
+  def layout_garden_url
+    ENV["LAYOUT_GARDEN_URL"]
+  end
+
+  def theme_garden_url
+    ENV["THEME_GARDEN_URL"]
+  end
+
+  def widget_garden_url
+    ENV["WIDGET_GARDEN_URL"]
+  end
 end

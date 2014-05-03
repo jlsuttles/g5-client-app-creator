@@ -12,6 +12,9 @@ deploys:
         - "ID_RSA"
         - "G5_CONFIGURATOR_FEED_URL"
         - "NEW_RELIC_APP_NAME"
+        - "LAYOUT_GARDEN_URL"
+        - "THEME_GARDEN_URL"
+        - "WIDGET_GARDEN_URL"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"
