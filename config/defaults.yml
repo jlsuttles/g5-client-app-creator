@@ -15,6 +15,8 @@ deploys:
         - "LAYOUT_GARDEN_URL"
         - "THEME_GARDEN_URL"
         - "WIDGET_GARDEN_URL"
+        - "AWS_ACCESS_KEY_ID"
+        - "AWS_SECRET_ACCESS_KEY"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"

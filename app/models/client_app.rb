@@ -118,4 +118,12 @@ class ClientApp < ActiveRecord::Base
   def widget_garden_url
     ENV["WIDGET_GARDEN_URL"]
   end
+
+  def aws_access_key_id
+    ENV["AWS_ACCESS_KEY_ID"]
+  end
+
+  def aws_secret_access_key
+    ENV["AWS_SECRET_ACCESS_KEY"]
+  end
 end
