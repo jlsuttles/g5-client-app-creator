@@ -126,4 +126,12 @@ class ClientApp < ActiveRecord::Base
   def aws_secret_access_key
     ENV["AWS_SECRET_ACCESS_KEY"]
   end
+
+  def g5_auth_endpoint
+    "https://auth.g5search.com"
+  end
+
+  def g5_auth_redirect_uri
+    "https://#{heroku_app_name}.herokuapp.com/g5_auth/users/auth/g5/callback"
+  end
 end

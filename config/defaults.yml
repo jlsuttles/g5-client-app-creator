@@ -17,6 +17,8 @@ deploys:
         - "WIDGET_GARDEN_URL"
         - "AWS_ACCESS_KEY_ID"
         - "AWS_SECRET_ACCESS_KEY"
+        - "G5_AUTH_ENDPOINT"
+        - "G5_AUTH_REDIRECT_URI"
       tasks:
         - "rake db:migrate"
         - "rake deploy:tasks"
