@@ -127,6 +127,10 @@ class ClientApp < ActiveRecord::Base
     ENV["AWS_SECRET_ACCESS_KEY"]
   end
 
+  def aws_region
+    ENV["AWS_REGION"]
+  end
+
   def g5_auth_endpoint
     "https://dev-auth.g5search.com"
   end
