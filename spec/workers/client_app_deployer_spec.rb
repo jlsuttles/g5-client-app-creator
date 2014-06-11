@@ -19,8 +19,8 @@ describe ClientAppDeployer do
       ClientApp.any_instance.should_receive(:deploy).once
       ClientAppDeployer.perform(client_app.id)
     end
-    it "runs rake db:migrate" do
-      ClientApp.any_instance.should_receive(:heroku_run).with("rake db:migrate").once
+    it "runs rake db:schema:load" do
+      ClientApp.any_instance.should_receive(:heroku_run).with("rake db:schema:load").once
       ClientAppDeployer.perform(client_app.id)
     end
     it "sets config variables" do

@@ -21,7 +21,7 @@ deploys:
         - "G5_AUTH_ENDPOINT"
         - "G5_AUTH_REDIRECT_URI"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
@@ -44,7 +44,7 @@ deploys:
         - "APP_DISPLAY_NAME"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
@@ -57,7 +57,7 @@ deploys:
         - "SECRET_KEY_BASE"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
@@ -67,7 +67,7 @@ deploys:
         - "SECRET_KEY_BASE"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
