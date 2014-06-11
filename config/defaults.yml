@@ -16,7 +16,7 @@ deploys:
         - "THEME_GARDEN_URL"
         - "WIDGET_GARDEN_URL"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
@@ -39,7 +39,7 @@ deploys:
         - "APP_DISPLAY_NAME"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
         - "rake deploy:tasks"
       addons:
         - "redistogo:nano"
@@ -52,7 +52,7 @@ deploys:
         - "SECRET_KEY_BASE"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
@@ -62,7 +62,7 @@ deploys:
         - "SECRET_KEY_BASE"
         - "NEW_RELIC_APP_NAME"
       tasks:
-        - "rake db:migrate"
+        - "rake db:schema:load"
       addons:
         - "papertrail:choklad"
         - "pgbackups:auto-month"
