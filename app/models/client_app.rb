@@ -118,4 +118,24 @@ class ClientApp < ActiveRecord::Base
   def widget_garden_url
     ENV["WIDGET_GARDEN_URL"]
   end
+
+  def aws_access_key_id
+    ENV["AWS_ACCESS_KEY_ID"]
+  end
+
+  def aws_secret_access_key
+    ENV["AWS_SECRET_ACCESS_KEY"]
+  end
+
+  def aws_region
+    ENV["AWS_REGION"]
+  end
+
+  def g5_auth_endpoint
+    "https://dev-auth.g5search.com"
+  end
+
+  def g5_auth_redirect_uri
+    "https://#{heroku_app_name}.herokuapp.com/g5_auth/users/auth/g5/callback"
+  end
 end
