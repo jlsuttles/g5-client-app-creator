@@ -128,7 +128,7 @@ class ClientApp < ActiveRecord::Base
   end
 
   def g5_auth_endpoint
-    "https://auth.g5search.com"
+    "https://dev-auth.g5search.com"
   end
 
   def g5_auth_redirect_uri
